@@ -1,11 +1,31 @@
 ---
-title: "Stat for Engineering"
+title: "Statistics and Probability for Engineering"
 ---
 
-This is a Quarto website.
+This an educational website where undergrad students of CSE, EEE, Textile engineering will able to learn:
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+-   Descriptive statistics,
 
-```{r}
-1 + 1
-```
+-   Probability and probability distributions, their uses in real life
+
+-   Transformation of random variables, bivariate distribution
+
+-   Limit Theorems
+
+-   Stochastic Processes-Bernoulli process, Poisson Process, Markov Chain, Birth and Death Process, Queuing Theory
+
+-   Sampling distributions and parameter estimation in Classical Statistical Inference
+
+-   Hypothesis testing
+
+-   Analysis of variance (ANOVA)- one -factor and multi-factor ANOVA
+
+-   Simple and Multiple Linear regression
+
+-   Chi-squared Test of categorical data, Goodness Fit test
+
+-   Statistical Quality Control
+
+-   No-parametric test of hypothesis
+
+-   Bayesian Statistical Inference

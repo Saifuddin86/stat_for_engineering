@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics for Engineering - Statistics and Probability for Engineering</title>
+<title>Statistics for Engineering - Continuous random variable</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -67,6 +87,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -89,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -101,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Introduction to statistics and Data analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./continuous_r.v.html"> 
+    <a class="nav-link active" href="./continuous_r.v.html" aria-current="page"> 
 <span class="menu-text">Continuous random variable</span></a>
   </li>  
   <li class="nav-item">
@@ -120,14 +169,24 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition"><strong>Definition</strong></a></li>
+  <li><a href="#illustration-with-an-example" id="toc-illustration-with-an-example" class="nav-link" data-scroll-target="#illustration-with-an-example">Illustration with an example</a></li>
+  <li><a href="#cdf-of-continuous-r.v-x" id="toc-cdf-of-continuous-r.v-x" class="nav-link" data-scroll-target="#cdf-of-continuous-r.v-x"><strong>CDF of</strong> continuous r.v <span class="math inline">\(X\)</span></a></li>
+  <li><a href="#expectation-and-variance-of-continuous-r.v" id="toc-expectation-and-variance-of-continuous-r.v" class="nav-link" data-scroll-target="#expectation-and-variance-of-continuous-r.v"><strong>Expectation and variance of continuous r.v</strong></a></li>
+  <li><a href="#joint-probability-distributions" id="toc-joint-probability-distributions" class="nav-link" data-scroll-target="#joint-probability-distributions">Joint Probability Distributions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics and Probability for Engineering</h1>
+<h1 class="title">Continuous random variable</h1>
 </div>
 
 
@@ -144,23 +203,184 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This an educational website where undergrad students of CSE, EEE, Textile engineering will able to learn:</p>
-<ul>
-<li><p>Descriptive statistics,</p></li>
-<li><p>Probability and probability distributions, their uses in real life</p></li>
-<li><p>Sampling distributions and parameter estimation</p></li>
-<li><p>Hypothesis testing</p></li>
-<li><p>Analysis of variance (ANOVA)- one -factor and multi-factor ANOVA</p></li>
-<li><p>Simple and Multiple Linear regression</p></li>
-<li><p>Stochastic Processes-Bernoulli process, Poisson Process, Markov Chain, Birth and Death Process, Queuing Theory</p></li>
-<li><p>Chi-squared Test of categorical data, Goodness Fit test</p></li>
-<li><p>Statistical Quality Control</p></li>
-<li><p>No-parametric test of hypothesis</p></li>
-</ul>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition"><strong>Definition</strong></h2>
+<p>A continuous r.v <span class="math inline">\(X\)</span> must have a probability density function (PDF) <span class="math inline">\(f(x)\)</span> such that</p>
+<p>1) <span class="math inline">\(f(x) \ge 0\)</span> <strong>[Non-negativity]</strong></p>
+<p>2) <span class="math inline">\(\int_{x\in \mathbb{R}} f(x)dx =1\)</span> <strong>[Total AREA under the curve</strong> <span class="math inline">\(f(x)\)</span> always 1]</p>
+<p>3) <span class="math inline">\(P(a&lt;X&lt;b)=\int_a^b f(x) dx\)</span></p>
+</section>
+<section id="illustration-with-an-example" class="level2">
+<h2 class="anchored" data-anchor-id="illustration-with-an-example">Illustration with an example</h2>
+<p>Given <span class="math inline">\(f(x)=\frac{1}{2}x \ \ ; 0\le x\le 2\)</span></p>
+<p>a) Show/plot the graph of <span class="math inline">\(f(x)\)</span>.</p>
+<p>b) Is <span class="math inline">\(f(x)\)</span> a PDF?</p>
+<p>c) Find <span class="math inline">\(P(X&lt;1.0)\)</span>.</p>
+<p>d) Find <span class="math inline">\(P(X=1.0)\)</span></p>
+<p><strong><em>Solution:</em></strong></p>
+<p>(a)</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="continuous_r.v_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>b) Here, <span class="math inline">\(f(x)\ge 0\)</span> for all values of <span class="math inline">\(x\)</span> in the interval <span class="math inline">\(0\le x\le2\)</span>.</p>
+<p>Now, <strong>total area under curve</strong> <span class="math inline">\(f(x)\)</span> from <span class="math inline">\(x=0\)</span> to <span class="math inline">\(x=2\)</span> is</p>
+<p><span class="math inline">\(\int_{0}^2 f(x)dx\)</span></p>
+<p><span class="math inline">\(=AREA \ \ of\ \  the\ \  SHADED\ \  Triangle\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="continuous_r.v_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[
+=\frac{1}{2} \times base\times height
+\]</span></p>
+<p><span class="math display">\[
+=\frac{1}{2} \times 2\times 1=1
+\]</span></p>
+<p>So, total area under curve <span class="math inline">\(f(x)\)</span> is <span class="math inline">\(1\)</span> that is <span class="math inline">\(\int_{0}^{2} f(x)dx=1\)</span>.</p>
+<p>Hence, <span class="math inline">\(f(x)\)</span> is a PDF.</p>
+<p>c) Here,</p>
+<p><span class="math display">\[
+P(X&lt;1)=Area \ \ under\ \ the \ \ curve \ \ from \ \ x=0 \ \ to  \ \ x=1
+\]</span></p>
+<p><span class="math display">\[
+=Area \ \ of \ \ the \ \ SHADED \ \ Triangle
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="continuous_r.v_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[
+=\frac{1}{2}\times 1 \times f(1)=\frac{1}{2}\times 1 \times 0.5=0.25
+\]</span></p>
+<p>Therefore <span class="math inline">\(P(X&lt;1)=0.25\)</span></p>
+<p>d) <span class="math inline">\(P(X=1.0)=0\)</span> [Because there is no area at <span class="math inline">\(x=1.0\)</span>]</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We always remember that <strong>Probability in an interval of</strong> <span class="math inline">\(X\)</span> is a<strong>ctually the</strong> <span class="math inline">\(AREA\)</span> <strong>under the pdf</strong> <span class="math inline">\(f(x)\)</span><strong>.</strong></p>
+</div>
+</div>
+<p><strong>Problem 6.2.1</strong> A random variable has the following density function.</p>
+<p><span class="math display">\[
+f(x)=1-0.5x \ \ ; \ \ 0&lt;x&lt;2
+\]</span><br>
+a) Graph the density function.</p>
+<p>b) Verify that <span class="math inline">\(f(x)\)</span> is a density function.</p>
+<p>c) Fond <span class="math inline">\(P(X&gt;1)\)</span>.</p>
+<p>d) Find <span class="math inline">\(P(X&lt;0.5)\)</span>.</p>
+<p>e) Find <span class="math inline">\(P(X=1.5)\)</span>.</p>
+<p><strong>N.B:</strong> <span class="math inline">\(P(X=a)=0\)</span> as well as <span class="math inline">\(P(X=b)=0\)</span>. So, <span class="math inline">\(P(X\le a )\)</span> is same as <span class="math inline">\(P(X&lt;a)\)</span>.</p>
+</section>
+<section id="cdf-of-continuous-r.v-x" class="level2">
+<h2 class="anchored" data-anchor-id="cdf-of-continuous-r.v-x"><strong>CDF of</strong> continuous r.v <span class="math inline">\(X\)</span></h2>
+<p>By definition, CDF,</p>
+<p><span class="math display">\[
+F(x)=P(X\le x)= \int_{-\infty}^{x} f(x)dx
+\]</span></p>
+<p>Therefore, <span class="math display">\[
+f(x)=\frac{d}{dx} F(x)
+\]</span>.</p>
+</section>
+<section id="expectation-and-variance-of-continuous-r.v" class="level2">
+<h2 class="anchored" data-anchor-id="expectation-and-variance-of-continuous-r.v"><strong>Expectation and variance of continuous r.v</strong></h2>
+<p>If <span class="math inline">\(X\)</span> is a continuous r.v with PDF <span class="math inline">\(f(x)\)</span> then</p>
+<p>Expected value of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[
+\mu=E(X)= \int_{x\in \mathbb{R}} x\cdot f(x)dx
+\]</span> Variance of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[
+Var(X)=E(X^2)-\mu^2=\int_{x\in \mathbb{R}} x^2\cdot f(x)dx-\mu^2
+\]</span></p>
+<p><strong>Example 3.11</strong><span class="citation" data-cites="walpole2017">(<a href="#ref-walpole2017" role="doc-biblioref">Walpole et al. 2017</a>)</span> Suppose that the error in the reaction temperature, in <span class="math inline">\(^0C\)</span>, for a controlled laboratory experiment is a continuous random variable X having the probability density function</p>
+<p><span class="math display">\[
+f(x)=\frac{x^2}{3}; -1&lt;x&lt;2.
+\]</span></p>
+<ol type="a">
+<li>Verify that <span class="math inline">\(f(x)\)</span> is a density function.</li>
+<li>Find <span class="math inline">\(P(0&lt; X \le 1)\)</span>.</li>
+</ol>
+<p><strong>Example 3.12</strong><span class="citation" data-cites="walpole2017">(<a href="#ref-walpole2017" role="doc-biblioref">Walpole et al. 2017</a>)</span> Find <span class="math inline">\(F(x)\)</span>, and use it to evaluate <span class="math inline">\(P(0 &lt; X\le1)\)</span>.</p>
+<p><strong>H.W:</strong> Find <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(Var(X)\)</span> where,<span class="math inline">\(f(x)=\frac{x^2}{3}; -1&lt;x&lt;2\)</span>.</p>
+<p><strong>Exercise 3.29</strong><span class="citation" data-cites="walpole2017">(<a href="#ref-walpole2017" role="doc-biblioref">Walpole et al. 2017</a>)</span> An important factor in solid missile fuel is the particle size distribution. Significant problems occur if the particle sizes are too large. From production data in the past, it has been determined that the particle size (in micrometers) distribution is characterized by</p>
+<p><span class="math display">\[
+f(x)=3x^{-4}; x&gt; 1
+\]</span></p>
+<ol type="a">
+<li>Verify that this is a valid density function.</li>
+<li>Evaluate <span class="math inline">\(F(x)\)</span>.</li>
+<li>What is the probability that a random particle from the manufactured fuel exceeds 4 micrometers?</li>
+</ol>
+<p><strong>Exercise 3.69</strong><span class="citation" data-cites="walpole2017">(<a href="#ref-walpole2017" role="doc-biblioref">Walpole et al. 2017</a>)</span> The life span in hours of an electrical component is a random variable with cumulative distribution function</p>
+<p><span class="math display">\[
+F(x)=1-e^{-\frac{x}{50}}; x&gt;0
+\]</span></p>
+<ol type="a">
+<li><p>Determine its probability density function (PDF).</p></li>
+<li><p>Determine the probability that the life span of such a component will exceed 70 hours.</p></li>
+</ol>
+<p><strong>Exercise 3.36</strong> <span class="citation" data-cites="walpole2017">(<a href="#ref-walpole2017" role="doc-biblioref">Walpole et al. 2017</a>)</span> On a laboratory assignment, if the equipment is working, the density function of the observed outcome, <span class="math inline">\(X\)</span>, is</p>
+<p><span class="math display">\[
+f(x)=2(1-x) \ \ ; 0&lt;x&lt;1
+\]</span></p>
+<ol type="a">
+<li><p>Calculate <span class="math inline">\(P(X\le 1)\)</span></p></li>
+<li><p>What is the probability that <span class="math inline">\(X\)</span> will exceed 0.5?</p></li>
+<li><p>Given that <span class="math inline">\(X \ge 0.5\)</span>, what is the probability that <span class="math inline">\(X\)</span> will be less than 0.75?</p></li>
+</ol>
+<p><strong>Hints:</strong> We can solve this exercise by either using <span class="math inline">\(F(x)\)</span> or simply drawing function <span class="math inline">\(f(x)\)</span>.</p>
+</section>
+<section id="joint-probability-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="joint-probability-distributions">Joint Probability Distributions</h2>
+<p>When events are happened simultaneously, to explore the relationship between two random variables we need <strong>joint probability distributions.</strong></p>
+<p><strong>Definition</strong></p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The function <span class="math inline">\(f(x,y)\)</span> is said to be a <strong>joint density function</strong> of the continuous random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> if</p>
+<ol type="1">
+<li><span class="math inline">\(f(x,y)\ge0,\)</span> for all <span class="math inline">\((x,y)\)</span></li>
+<li><span class="math inline">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)\ \ dx\ \ dy=1\)</span></li>
+<li><span class="math inline">\(P[(X,Y)\in A]=\int \int _A f(x,y) \ \ dx \ \ dy,\)</span> for any region <span class="math inline">\(A\)</span> in the plane <span class="math inline">\(xy\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-walpole2017" class="csl-entry" role="listitem">
+Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, and Keying Ye. 2017. <em>Probability &amp; statistics for engineers &amp; scientists: MyStatLab update</em>. Ninth edition. Boston: Pearson.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

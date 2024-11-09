@@ -2,12 +2,16 @@ project:
   type: website
 
 website:
-  title: "Stat for Engineering"
+  title: "Statistics  for Engineering"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - intro_stat.qmd
+      - continuous_r.v.qmd
+      - some_special_continuous r.v.qmd
+      #- references.qmd
 
 format:
   html:
@@ -17,3 +21,8 @@ format:
 
 editor: visual
 
+bibliography: references.bib
+
+execute: 
+  echo: false
+  warning: false
