@@ -1,8 +1,11 @@
 ---
 title: "Some special Continuous random variables"
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
 ---
 
-
+Like the discrete case, varieties of real life events can be described by relatively few families of continuous distributions. In this section we will discuss Uniform, Normal, Exponential and Gamma families.
 
 ## Uniform distribution/r.v
 
@@ -12,7 +15,7 @@ $$
 f(x)=\frac{1}{b-a} \ \ ; \ \ a<x<b
 $$ {#eq-unif.pdf}
 
-![Graph of f(x)](images/clipboard-3046233387.png){#fig-unifpdf width="377"}
+![Graph of f(x)](images/clipboard-3046233387.png){#fig-unifpdf width="377" fig-align="left"}
 
 with
 
@@ -26,7 +29,7 @@ with
 
 If $X\sim U(a,b)$ then the $P(x_1<X<x_2)$ is actually the **area of the shaded rectangle.**
 
-![Computing area for an interval of Uniform distribution](images/clipboard-2570030964.png){width="380"}
+![Computing area for an interval of Uniform distribution](images/clipboard-2570030964.png){#fig-unifarea width="380" fig-align="left"}
 
 That is,
 
@@ -64,215 +67,6 @@ set.seed(911)
 u=runif(1000,10,30) # Generating 1000 random numbers from U(10,30)
 hist(u,main = " ",col="steelblue",ylim = c(0,120)) # Frequency histogram of U
 
-```
-
-## Exponential r.v
-
-In many situations, such as when modeling waiting times, inter-arrival times, the lifespan of hardware, breakdown times, and the intervals between phone calls, the exponential distribution is utilized. The time (suppose $T$) between rare events in Poisson process with arrival rate $\lambda$ (*number of arrival per unit time*) can be treated as exponential r.v.
-
-The exponential r.v $T$ has the following PDF
-
-$$
-f(t)=\lambda e^{-\lambda t} \ \ ; \ \ t>0
-$$ {#eq-expo}
-
--   **CDF:** $F(t)=P(T\le t)=P(T< t)=1-e^{-\lambda t}; t> 0$
-
-    Hence, $P(T> t)=1-P(T\le t)=1-F(t)=e^{-\lambda t}$
-
--   **Mean:** $E(T)=\frac{1}{\lambda}$
-
--   **Variance:** $Var(T)=\frac{1}{\lambda^2}$
-
--   [**We write**]{.underline}**,** $T\sim Exp(\lambda)$
-
-```{r fig.height=3.5,fig.width=6}
-#| label: fig-expo
-#| fig-cap: "Exponential probability density functions for selected values of $\\lambda$"
-
-library(tidyverse)
-
-t <- seq(0,5,0.1)
-
-#plot(t,dexp(t,0.5),type = "l")
-
-exp1<-dexp(t,0.5)
-exp2<-dexp(t,1 )
-exp3<-dexp(t,1.5)
-
-wide.exp<-data.frame(t,exp1,exp2,exp3)
-#wide.ps
-
-long.exp<-wide.exp%>%gather(key = "rate",value = "density",-t)
-#head(long.ps)
-
-long.exp$rate<-factor(long.exp$rate,labels = c("0.5","1","1.5"))
-#head(long.exp)
-
-long.exp%>%ggplot(aes(t,density,color=rate))+
-   geom_line(lwd=0.7)+
-   #facet_wrap(~rate,labeller = label_parsed)+
-   scale_x_continuous(breaks = seq(0, 5, 1.5),limits=c(0, 5))+
-   labs(x="t (Time) ",y="f(t)",
-        #title =expression(paste("Exponential probability density functions for selected values of"," ",lambda )),
-        color=expression(paste(lambda,"(Arrival rate)")))+
-   theme_bw()+
-  theme(legend.position = "right",
-        plot.title = element_text(size = 14),
-        plot.background = element_rect(color = "black"))
-
-```
-
-The quantity $\lambda$ is a parameter of Exponential distribution, and its meaning is clear from $E(T) = \frac{1}{\lambda}$ . If T is time, measured in minutes, then $\lambda$ is a frequency, measured in $min^{-1}$. For example, if arrivals occur every half a minute, on the average, then $E(T) = 0.5$min and $\lambda=2$, saying that they occur with a frequency (arrival rate) of 2 arrivals per minute. This $\lambda$ has the same meaning as the parameter of Poisson distribution[@baron2019].
-
-**Example 4.5**[@baron2019] Jobs are sent to a printer at an average rate of 3 jobs per hour.
-
-(a) What is the expected time between jobs?
-
-(b) What is the probability that the next job is sent within 5 minutes?
-
-***Solution:*** Given, number of jobs per hour, $\lambda=3\ \ hr^{-1}$ per hour. Let, $T$=time elapsed between jobs (hour).
-
-So, $T\sim Exp(\lambda)$
-
-(a) $E(T)=\frac{1}{\lambda} hr=\frac{1}{3} hr=20\ \ mins$;
-(b) Here, $5 \ \ mins=\frac{5}{60} hr=\frac{1}{12} hr$ We know, $F(t)=1-e^{-\lambda t}; t>0$
-
-So, $P(T<5 \ \ mins)=P(T<\frac{1}{12})=F(\frac{1}{12})=1-e^{-3*\frac{1}{12}}=0.22$
-
-**Example 4.58** [@navidi2011] A radioactive mass emits particles according to a Poisson process at a mean rate of 15 particles per minute. At some point, a clock is started. What is the probability that more than 5 seconds will elapse before the next emission? What is the mean waiting time until the next particle is emitted?
-
-***Solution***
-
-Let, $T=elapsed \ \ time \ \ before \ \ the \ \ next \ \ emission (in \ \ second)$
-
-Given, $\lambda=15 min^{-1}=\frac{15}{60} s^{-1}=0.25 s^{-1}$ and
-
-$T\sim Exp(\lambda)$;
-
-$P(T\le t)=F(t)=1-e^{-\lambda t}$
-
-*P(more than 5 seconds will elapse before the next emission)*=$P(T>5)=e^{-\lambda * 5}=e^{-0.25*5}=0.2865$
-
-*Mean waiting time*, $E(T)=\frac{1}{\lambda} s=\frac{1}{0.25}s=4s$
-
-### Lack of Memory Property
-
-If $T \sim Exp(\lambda)$, and $t$ and $s$ are positive numbers, then
-
-$$
-P(T> t+s| T> s)=P(T> t)
-$$
-
-We can also express the *Lack of memory property* in this way:
-
-$$
-P(T< t+s| T> s)=P(T< t)
-$$
-
-The probability that we must wait additional $t$ units, given that we have already waited $s$ units, is the same as the probability that we must wait $t$ units from the start. The exponential distribution does not "*remember*" how long we have been waiting.
-
--   In particular, if the lifetime of a component follows the exponential distribution, then the probability that a component that is $s$ time units old will last an additional $t$ time units is the same as the probability that a new component will last $t$ time units.
-
--   In other words, a component whose lifetime follows an exponential distribution does not show any effects of age or wear[@navidi2011].
-
--   But if the failure of the component is a result of gradual or slow wear (as in mechanical wear), then the exponential does not apply and either the **gamma** or the **Weibull distribution** (see [@walpole2017], Section 6.10) may be more appropriate.
-
-**Example 4.59**[@navidi2011] The lifetime of a particular integrated circuit has an exponential distribution with mean 2 years. Find the probability that the circuit lasts longer than three years.
-
-**Example 4.60**[@navidi2011] Refer to Example 4.59. Assume the circuit is now four years old and is still functioning. Find the probability that it functions for more than three additional years (Hints: Apply Lack of Memory Property).
-
-**Exercises for Section 4.7**[@navidi2011]
-
-1.Let $T \sim Exp(0.45)$. Find $\mu_T, \sigma^2_T, P(T>3)$ and the median of $T$.
-
-2.The time between requests to a web server is exponentially distributed with mean 0.5 seconds.
-
-a.  What is the value of the parameter $\lambda$?
-b.  What is the median time between requests?
-c.  What is the standard deviation?
-d.  What is the 80th percentile?
-e.  Find the probability that more than one second elapses between requests.
-f.  If there have been no requests for the past two seconds, what is the probability that there more than one additional second will elapse before the next request?
-
-***Solution***
-
-Let, $T=time \ \ between \ \ requests \ \ in \ \ second$
-
-If, $T\sim Exp(\lambda)$; then it is given that
-
-$E(T)=0.5 \ \ second$
-
-$\implies \frac{1}{\lambda}=0.5 \ \ second$
-
-**a.** $\therefore \lambda=2 s^{-1}$
-
-b.  If $M$ is the median time between request then,
-
-$P(T \le M)=0.5$
-
-$\implies F(M)=0.5$
-
-$\implies 1-e^{-\lambda *M}=0.5$
-
-$\implies e^{-\lambda *M}=0.5$
-
-$\implies {-\lambda *M}=ln(0.5)$
-
-$\implies M =\frac{ln(0.5)}{-\lambda}=\frac{ln(0.5)}{-2}=0.3466\approx0.35$
-
-So, median time between request is $0.35s$
-
-c.  Standard deviation of $T$, $\sigma_T=\frac{1}{\lambda}s=1/2 =0.5 s$
-
-d.  Let, $P_{80}$ denotes 80th percentile.
-
-So, solve the following equation for $P_{80}$
-
-$P(T\le P_{80})=0.80)$
-
-$\implies F(P_{80})=0.80$
-
-$\implies 1-e^{-\lambda \times P_{80}}=0.80$
-
-$\implies e^{-\lambda \times P_{80}}=0.20$
-
-$\implies P_{80}=\frac {ln(0.20)}{-\lambda}=0.805$
-
-$\therefore P_{80}=0.805 s$
-
-e.  $P(T>1)=e^{-\lambda *1}=0.1353$
-
-f.  If there have been no requests for the past two seconds, the probability that there more than ***one*** **additional second** will elapse before the next request is:
-
-$P(T>1+2 /T>2)=P(T>1)=e^{-\lambda *1}=0.1353$ $$by using *Lack of memory property*$$
-
-8.A radioactive mass emits particles according to a Poisson process at a mean rate of 2 per second. Let T be the waiting time, in seconds, between emissions.
-
-a.  What is the mean waiting time?
-b.  What is the median waiting time?
-c.  Find $P(T > 2)$. Hint:$P(T > 2)=e^{-\lambda *2}$
-d.  Find $P(T < 0.1)$.Hint:$P(T < 0.1)=F(0.1)$
-e.  Find $P(0.3< T < 1.5)$. Hint:$P(0.3< T < 1.5)=F(1.5)-F(0.3)$
-f.  If 3 seconds have elapsed with no emission, what is the probability that there will be an emission within the next second? (Use Lack of Memory Property)
-
-**Solution of f.**
-
-Since T is exponentially distributed and hold lack of memory property, so it dose not matter what was happened in past 3 seconds. We have to just compute that *there will be an emission (event will occur) within the next second*. So,
-
-$P(T<1)=F(1)=1-e^{-\lambda*1}$ (*do yourself*)
-
-### Generating exponential random numbers in R
-
-```{r echo=TRUE}
-#| label: fig-rexpo
-#| fig-cap: "Histogram of exponential random variable from Exp($\\lambda=2.5)$,$\\ n=1000$"
-#| fig-align: left
-
-par(mar=c(4,4,1,1)) # Adjust graph margin
-set.seed(911) 
-t=rexp(1000,rate = 2.5)
-hist(t, main = "",col = "steelblue")
 ```
 
 ## Normal or Gaussian r.v
@@ -590,7 +384,7 @@ x=\mu+z\sigma
 $$
 :::
 
-### **Applications of the Normal Distribution**[@walpole2017]
+### Applications of the Normal Distribution[@walpole2017]
 
 **Example 6.7**: A certain type of storage battery lasts, on average, 3.0 years with a standard deviation of 0.5 year. Assuming that battery life is normally distributed, find the probability that a given battery will last less than 2.3 years.
 
@@ -663,4 +457,317 @@ $\therefore d=0.392$
 
 ### Normal approximation to Binomial distribution
 
-Binom tends to normal
+Binom tends to normal when $n \rightarrow \infty$ and $p\rightarrow 0.5$
+
+```{r fig.height=3, fig.width=7}
+#| label: fig-bintonorm1
+#| fig-cap: "Histogram of $Bin(x; n=6,p=0.2)$"
+#| fig-align: left
+
+
+n1=6
+p=0.2
+binx1=0:n1
+binfx1=dbinom(binx1,n1,p)
+barplot(binfx1,lwd=1,
+        space = 0, names.arg = binx1,col = "steelblue",
+        #main ="Histogram for Bin(x; n=6,p=0.2)",
+        xlab = "x (number of success)",
+        ylab = "Probability, f(x)",
+        ylim = c(0,0.40)
+        )
+box("outer", col = "black", lwd = 0.5)  
+```
+
+```{r fig.height=3, fig.width=7}
+#| label: fig-bintonorm2
+#| fig-cap: "Histogram of $Bin(x; n=15,p=0.2)$"
+#| fig-align: left
+
+n2=15
+p=0.2
+binx2=0:n2
+binfx2=dbinom(binx2,n2,p)
+barplot(binfx2,lwd=1,
+        space = 0, names.arg = binx2,col = "steelblue",
+        #main ="Histogram for Bin(x; n=15,p=0.2)",
+        xlab = "x (number of success)",
+        ylab = "Probability, f(x)",
+        ylim = c(0,0.26)
+        )
+box("outer", col = "black", lwd = 0.5)
+
+```
+
+```{r fig.height=3, fig.width=7}
+#| label: fig-bintonorm3
+#| fig-cap: "Histogram of $Bin(x; n=50,p=0.2)$"
+#| fig-align: left
+
+n3=50
+p=0.2
+binx3=0:n3
+binfx3=dbinom(binx3,n3,p)
+barplot(binfx3,lwd=1,
+        space = 0, names.arg = binx3,col = "steelblue",
+        #main ="Histogram for Bin(x; n=50,p=0.2)",
+        xlab = "x (number of success)",
+        ylab = "Probability, f(x)",
+        ylim = c(0,0.14))
+
+box("outer", col = "black", lwd = 0.5)
+```
+
+From @fig-bintonorm1, @fig-bintonorm2 and @fig-bintonorm3 we observe that as $n$ getting large with $p=0.2$ (which is not extremely close to 0) the binomial distribution can be approximated to normal distribution.
+
+So, when $n$ become large and $p$ is not extremely small (close to 0) or extremely large (close to 1) the normal approximation is most useful in calculating binomial sums.
+
+::: callout-important
+### Normal Approximation to the Binomial Distribution
+
+-   Let X be a binomial random variable with parameters $n$ and $p$. For large $n$, $X$ has approximately a normal distribution with $\mu = np$ and $\sigma^2 =np(1-p)$.
+
+-   The approximation will be good if $np$ and $n(1-p)$ are greater than or equal to $5$ [@walpole2017].
+:::
+
+**Continuity correction**
+
+This correction is needed when we approximate a discrete distribution (Binomial in this case) by a continuous distribution (Normal). Recall that the probability $P(X = x)$ may be positive if $X$ is discrete, whereas it is always $0$ for continuous $X$. This is resolved by introducing a continuity correction. Expand the interval by 0.5 units in each direction, then use the Normal approximation [@baron2019].
+
+| Binomial Probability | With continuity correction |
+|:--------------------:|:--------------------------:|
+|       $P(X=x)$       |     $P(x-0.5<X<x+0.5)$     |
+|     $P(X\le x)$      |      $P(X\le x+0.5)$       |
+
+: Continuity correction for binomial probabilities {#tbl-continuity}
+
+**Example 6.15** [@walpole2017, page 191]: The probability that a patient recovers from a rare blood disease is 0.4. If 100 people are known to have contracted this disease, what is the probability that fewer than 30 survive?
+
+## Exponential r.v
+
+In many situations, such as when modeling waiting times, inter-arrival times, the lifespan of hardware, breakdown times, and the intervals between phone calls, the exponential distribution is utilized. The time (suppose $T$) between rare events in Poisson process with arrival rate $\lambda$ (*number of arrival per unit time*) can be treated as exponential r.v.
+
+The exponential r.v $T$ has the following PDF
+
+$$
+f(t)=\lambda e^{-\lambda t} \ \ ; \ \ t>0
+$$ {#eq-expo}
+
+-   **CDF:** $F(t)=P(T\le t)=P(T< t)=1-e^{-\lambda t}; t> 0$
+
+    Hence, $P(T> t)=1-P(T\le t)=1-F(t)=e^{-\lambda t}$
+
+-   **Mean:** $E(T)=\frac{1}{\lambda}$
+
+-   **Variance:** $Var(T)=\frac{1}{\lambda^2}$
+
+-   [**We write**]{.underline}**,** $T\sim Exp(\lambda)$
+
+```{r fig.height=3.5,fig.width=6}
+#| label: fig-expo
+#| fig-cap: "Exponential probability density functions for selected values of $\\lambda$"
+#| fig-align: left
+
+
+library(tidyverse)
+
+t <- seq(0,5,0.1)
+
+#plot(t,dexp(t,0.5),type = "l")
+
+exp1<-dexp(t,0.5)
+exp2<-dexp(t,1 )
+exp3<-dexp(t,1.5)
+
+wide.exp<-data.frame(t,exp1,exp2,exp3)
+#wide.ps
+
+long.exp<-wide.exp%>%gather(key = "rate",value = "density",-t)
+#head(long.ps)
+
+long.exp$rate<-factor(long.exp$rate,labels = c("0.5","1","1.5"))
+#head(long.exp)
+
+long.exp%>%ggplot(aes(t,density,color=rate))+
+   geom_line(lwd=0.7)+
+   #facet_wrap(~rate,labeller = label_parsed)+
+   scale_x_continuous(breaks = seq(0, 5, 1.5),limits=c(0, 5))+
+   labs(x="t (Time) ",y="f(t)",
+        #title =expression(paste("Exponential probability density functions for selected values of"," ",lambda )),
+        color=expression(paste(lambda,"(Arrival rate)")))+
+   theme_bw()+
+  theme(legend.position = "right",
+        plot.title = element_text(size = 14),
+        plot.background = element_rect(color = "black"))
+
+```
+
+The quantity $\lambda$ is a parameter of Exponential distribution, and its meaning is clear from $E(T) = \frac{1}{\lambda}$ . If T is time, measured in minutes, then $\lambda$ is a frequency, measured in $min^{-1}$. For example, if arrivals occur every half a minute, on the average, then $E(T) = 0.5$min and $\lambda=2$, saying that they occur with a frequency (arrival rate) of 2 arrivals per minute. This $\lambda$ has the same meaning as the parameter of Poisson distribution[@baron2019].
+
+**Example 4.5**[@baron2019] Jobs are sent to a printer at an average rate of 3 jobs per hour.
+
+(a) What is the expected time between jobs?
+
+(b) What is the probability that the next job is sent within 5 minutes?
+
+***Solution:*** Given, number of jobs per hour, $\lambda=3\ \ hr^{-1}$ per hour. Let, $T$=time elapsed between jobs (hour).
+
+So, $T\sim Exp(\lambda)$
+
+(a) $E(T)=\frac{1}{\lambda} hr=\frac{1}{3} hr=20\ \ mins$;
+
+(b) Here, $5 \ \ mins=\frac{5}{60} hr=\frac{1}{12} hr$.
+
+    We know, $F(t)=1-e^{-\lambda t}; t>0$
+
+So, $P(T<5 \ \ mins)=P(T<\frac{1}{12})=F(\frac{1}{12})=1-e^{-3*\frac{1}{12}}=0.22$
+
+**Example 4.58** [@navidi2011] A radioactive mass emits particles according to a Poisson process at a mean rate of 15 particles per minute. At some point, a clock is started. What is the probability that more than 5 seconds will elapse before the next emission? What is the mean waiting time until the next particle is emitted?
+
+***Solution***
+
+Let, $T=elapsed \ \ time \ \ before \ \ the \ \ next \ \ emission (in \ \ second)$
+
+Given, $\lambda=15 min^{-1}=\frac{15}{60} s^{-1}=0.25 s^{-1}$ and
+
+$T\sim Exp(\lambda)$;
+
+$P(T\le t)=F(t)=1-e^{-\lambda t}$
+
+*P(more than 5 seconds will elapse before the next emission)*=
+
+$P(T>5)=e^{-\lambda * 5}=e^{-0.25*5}=0.2865$
+
+*Mean waiting time*, $E(T)=\frac{1}{\lambda} s=\frac{1}{0.25}s=4s$
+
+### Lack of Memory Property
+
+If $T \sim Exp(\lambda)$, and $t$ and $s$ are positive numbers, then
+
+$$
+P(T> t+s| T> s)=P(T> t)
+$$
+
+We can also express the *Lack of memory property* in this way:
+
+$$
+P(T< t+s| T> s)=P(T< t)
+$$
+
+The probability that we must wait additional $t$ units, given that we have already waited $s$ units, is the same as the probability that we must wait $t$ units from the start. The exponential distribution does not "*remember*" how long we have been waiting.
+
+-   In particular, if the lifetime of a component follows the exponential distribution, then the probability that a component that is $s$ time units old will last an additional $t$ time units is the same as the probability that a new component will last $t$ time units.
+
+-   In other words, a component whose lifetime follows an exponential distribution does not show any effects of age or wear[@navidi2011].
+
+-   But if the failure of the component is a result of gradual or slow wear (as in mechanical wear), then the exponential does not apply and either the **gamma** or the **Weibull distribution** (see [@walpole2017], Section 6.10) may be more appropriate.
+
+**Example 4.59**[@navidi2011] The lifetime of a particular integrated circuit has an exponential distribution with mean 2 years. Find the probability that the circuit lasts longer than three years.
+
+**Example 4.60**[@navidi2011] Refer to Example 4.59. Assume the circuit is now four years old and is still functioning. Find the probability that it functions for more than three additional years (Hints: Apply Lack of Memory Property).
+
+**Exercises for Section 4.7**[@navidi2011]
+
+**1.** Let $T \sim Exp(0.45)$. Find $\mu_T, \sigma^2_T, P(T>3)$ and the median of $T$.
+
+**2.** The time between requests to a web server is exponentially distributed with mean 0.5 seconds.
+
+a.  What is the value of the parameter $\lambda$?
+b.  What is the median time between requests?
+c.  What is the standard deviation?
+d.  What is the 80th percentile?
+e.  Find the probability that more than one second elapses between requests.
+f.  If there have been no requests for the past two seconds, what is the probability that there more than one additional second will elapse before the next request?
+
+***Solution***
+
+**a)** Let, $T=time \ \ between \ \ requests \ \ in \ \ second$
+
+If, $T\sim Exp(\lambda)$; then it is given that
+
+$E(T)=0.5 \ \ second$
+
+$\implies \frac{1}{\lambda}=0.5 \ \ second$
+
+$\therefore \lambda=2 s^{-1}$.
+
+-------------------------------------------------------------------
+
+**b)** If $M$ is the median time between request then, $P(T \le M)=0.5$
+
+$\implies F(M)=0.5$
+
+$\implies 1-e^{-\lambda *M}=0.5$ $\implies e^{-\lambda *M}=0.5$
+
+$\implies {-\lambda *M}=ln(0.5)$
+
+$\implies M =\frac{ln(0.5)}{-\lambda}=\frac{ln(0.5)}{-2}=0.3466\approx0.35$
+
+So, median time between request is $0.35s$.
+
+-------------------------------------------------------------------
+
+**c)** Standard deviation of $T$, $\sigma_T=\frac{1}{\lambda}s=1/2 =0.5 s$.
+
+-------------------------------------------------------------------
+
+**d)** Let, $P_{80}$ denotes 80th percentile.
+
+So, solve the following equation for $P_{80}$
+
+$P(T\le P_{80})=0.80)$
+
+$\implies F(P_{80})=0.80$
+
+$\implies 1-e^{-\lambda \times P_{80}}=0.80$
+
+$\implies e^{-\lambda \times P_{80}}=0.20$
+
+$\implies P_{80}=\frac {ln(0.20)}{-\lambda}=0.805$
+
+$\therefore P_{80}=0.805 s$.
+
+-------------------------------------------------------------------
+
+**e)** $P(T>1)=e^{-\lambda \times1}=0.1353$.
+
+-------------------------------------------------------------------
+
+**f)** If there have been no requests for the past two seconds, the probability that there more than ***one*** **additional second** will elapse before the next request is:
+
+$P(T>1+2 /T>2)=P(T>1)=e^{-\lambda \times1}=0.1353$ \[By using Lack of memory property\]
+
+-------------------------------------------------------------------
+
+**8.** A radioactive mass emits particles according to a Poisson process at a mean rate of 2 per second. Let T be the waiting time, in seconds, between emissions.
+
+a.  What is the mean waiting time?
+
+b.  What is the median waiting time?
+
+c.  Find $P(T > 2)$ \[Hint:$P(T > 2)=e^{-\lambda *2}$\].
+
+d.  Find $P(T < 0.1)$ \[Hint:$P(T < 0.1)=F(0.1)$\].
+
+e.  Find $P(0.3< T < 1.5)$ \[Hint:$P(0.3< T < 1.5)=F(1.5)-F(0.3)$\]
+
+f.  If 3 seconds have elapsed with no emission, what is the probability that there will be an emission within the next second? \[Hint: *Use Lack of Memory Property*\]
+
+**Solution of (f)**
+
+Since $T$ is exponentially distributed and hold lack of memory property, so it dose not matter what was happened in past 3 seconds. We have to just compute that *there will be an emission (event will occur) within the next second*. So,
+
+$P(T<1)=F(1)=1-e^{-\lambda \times 1}$ (*do it yourself*)
+
+### Generating exponential random numbers in R
+
+```{r echo=TRUE}
+#| label: fig-rexpo
+#| fig-cap: "Histogram of exponential random variable from Exp($\\lambda=2.5)$,$\\ n=1000$"
+#| fig-align: left
+
+par(mar=c(4,4,1,1)) # Adjust graph margin
+set.seed(911) 
+t=rexp(1000,rate = 2.5)
+hist(t, main = "",col = "steelblue")
+```
