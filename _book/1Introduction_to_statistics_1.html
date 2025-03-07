@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistics and Probability for Engineering - 1&nbsp; Introduction to statistics and Data analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./2Probability_2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1Introduction_to_statistics_1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to statistics and Data analysis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics and Probability for Engineering</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-save"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./#">
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./#">
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./#">
+            </a>
+          </li>
+      </ul>
+    </div>
+    <a href="https://www.rstudio.com/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-git"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistics-and-Probability-for-Engineering.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistics-and-Probability-for-Engineering.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1Introduction_to_statistics_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to statistics and Data analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2Probability_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3Random_variable_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Random variable: Discrete</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4Some_special_discrete_random_variables_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Some special discrete random variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5Continuous_rv_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Continuous r.v and probability density function</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6Some_special_continuous_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Some special continuous random variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7Further_Topics_on_R.vs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Further topics on random variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link active" data-scroll-target="#descriptive-statistics"><span class="header-section-number">1.1</span> Descriptive statistics</a></li>
+  <li><a href="#measures-of-central-tendency-and-quantile" id="toc-measures-of-central-tendency-and-quantile" class="nav-link" data-scroll-target="#measures-of-central-tendency-and-quantile"><span class="header-section-number">1.2</span> Measures of central tendency and quantile</a>
+  <ul class="collapse">
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean"><span class="header-section-number">1.2.1</span> Mean</a></li>
+  <li><a href="#median" id="toc-median" class="nav-link" data-scroll-target="#median"><span class="header-section-number">1.2.2</span> Median</a></li>
+  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode"><span class="header-section-number">1.2.3</span> <strong>Mode</strong></a></li>
+  <li><a href="#percentiles" id="toc-percentiles" class="nav-link" data-scroll-target="#percentiles"><span class="header-section-number">1.2.4</span> Percentiles</a></li>
+  <li><a href="#quartiles" id="toc-quartiles" class="nav-link" data-scroll-target="#quartiles"><span class="header-section-number">1.2.5</span> Quartiles</a></li>
+  </ul></li>
+  <li><a href="#measures-of-variability" id="toc-measures-of-variability" class="nav-link" data-scroll-target="#measures-of-variability"><span class="header-section-number">1.3</span> Measures of variability</a>
+  <ul class="collapse">
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range"><span class="header-section-number">1.3.1</span> Range</a></li>
+  <li><a href="#inter-quartile-range-iqr" id="toc-inter-quartile-range-iqr" class="nav-link" data-scroll-target="#inter-quartile-range-iqr"><span class="header-section-number">1.3.2</span> Inter-quartile-range (IQR)</a></li>
+  <li><a href="#variance-and-standard-deviation" id="toc-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation"><span class="header-section-number">1.3.3</span> Variance and standard deviation</a></li>
+  <li><a href="#coefficient-of-variation" id="toc-coefficient-of-variation" class="nav-link" data-scroll-target="#coefficient-of-variation"><span class="header-section-number">1.3.4</span> Coefficient of variation</a></li>
+  </ul></li>
+  <li><a href="#graphical-summaryvisualization" id="toc-graphical-summaryvisualization" class="nav-link" data-scroll-target="#graphical-summaryvisualization"><span class="header-section-number">1.4</span> Graphical summary/visualization</a>
+  <ul class="collapse">
+  <li><a href="#frequency-distributions-and-histograms" id="toc-frequency-distributions-and-histograms" class="nav-link" data-scroll-target="#frequency-distributions-and-histograms"><span class="header-section-number">1.4.1</span> Frequency Distributions and Histograms</a></li>
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"><span class="header-section-number">1.4.2</span> <strong>Histogram</strong></a></li>
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot"><span class="header-section-number">1.4.3</span> Box-plot</a></li>
+  <li><a href="#boxplot-and-skewness-of-the-data" id="toc-boxplot-and-skewness-of-the-data" class="nav-link" data-scroll-target="#boxplot-and-skewness-of-the-data"><span class="header-section-number">1.4.4</span> Boxplot and skewness of the data</a></li>
+  </ul></li>
+  <li><a href="#exercises-practice-as-more-as-you-can" id="toc-exercises-practice-as-more-as-you-can" class="nav-link" data-scroll-target="#exercises-practice-as-more-as-you-can"><span class="header-section-number">1.5</span> Exercises (Practice as more as you can)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to statistics and Data analysis</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The field of <strong>statistics</strong> deals with the collection, presentation, analysis, and use of data to make decisions, solve problems, and design products and processes. In simple terms, <strong>statistics is the science of data</strong>.</p>
+<p>Because many aspects of engineering practice involve working with data, obviously knowledge of statistics is just as important to an engineer as are the other engineering sciences.</p>
+<p>Specifically, statistical techniques can be powerful aids in designing new products and systems, improving existing designs, and designing, developing, and improving production processes.</p>
+<p>Statistical methods are used to help us describe and understand <strong>variability</strong>. By variability, we mean that successive observations of a system or phenomenon do not produce the same result. We all encounter variability in our everyday lives, and <strong>statistical thinking</strong> can give us a useful way to incorporate this variability into our decision-making processes <span class="citation" data-cites="montgomery2014a">(<a href="references.html#ref-montgomery2014a" role="doc-biblioref">Montgomery and Runger 2014</a>)</span>.</p>
+<p>There are two types of data sets you will use when studying statistics. These data sets are called <strong>populations</strong> and <strong>samples</strong>.</p>
+<p>A <strong>population</strong> is the collection of all outcomes, responses, measurements, or counts that are of interest.<br>
+A <strong>sample</strong> is a subset, or part, of a population.</p>
+<p>Two important terms that are used throughout this course are <strong><em>parameter</em></strong> and <strong><em>statistic</em></strong>.</p>
+<p>A <strong><em>parameter</em></strong> is a numerical description of a <em>population characteristic</em>.<br>
+A <strong><em>statistic</em></strong> is a numerical description of a <em>sample characteristic</em>.</p>
+<p><strong>Data</strong> refers to a collection of facts, measurements, observations, or information that is gathered to be analyzed and used for decision-making, understanding patterns, or testing hypotheses.</p>
+<p>These facts can represent various forms of information, such as numbers, words, measurements, or even categories.</p>
+<p><strong>Types of data</strong></p>
+<p><strong>Quantitative Data (Numerical Data)</strong></p>
+<ul>
+<li><p>Data that represents numerical values.</p></li>
+<li><p>Example: Heights of people, temperatures, test scores.</p></li>
+<li><p>Subtypes:</p>
+<ul>
+<li><p><strong>Discrete Data</strong>: Countable values (e.g., number of students in a class).</p></li>
+<li><p><strong>Continuous Data</strong>: Measurable values that can take any value within a range (e.g., weight, time).</p></li>
+</ul></li>
+</ul>
+<p><strong>Qualitative Data (Categorical Data)</strong></p>
+<ul>
+<li><p>Data that represents categories or labels.</p></li>
+<li><p>Example: Colors of cars, types of animals, survey responses (e.g., yes/no).</p></li>
+<li><p>Subtypes:</p>
+<ul>
+<li><p><strong>Nominal Data</strong>: Categories without a natural order (e.g., gender, blood type).</p></li>
+<li><p><strong>Ordinal Data</strong>: Categories with a meaningful order (e.g., rankings, education levels).</p></li>
+</ul></li>
+</ul>
+<p><strong>Collecting Engineering Data</strong></p>
+<p>In the previous subsection, we illustrated some simple methods for summarizing data. Sometimes the data are all of the observations in the population. This results in a <strong>census</strong>. However, in the engineering environment, the data are almost always a <strong>sample</strong> that has been selected from the population. Three basic methods of collecting data are</p>
+<p>(i) A <strong>retrospective study</strong> using historical data (ii) An <strong>observational study</strong> (iii)A <strong>designed experiment</strong></p>
+<p>An effective data-collection procedure can greatly simplify the analysis and lead to improved understanding of the population or process that is being studied. We now consider some examples of these data-collection methods. (For detail, <em>see</em> <span class="citation" data-cites="montgomery2014a">Montgomery and Runger (<a href="references.html#ref-montgomery2014a" role="doc-biblioref">2014</a>)</span> <strong>, Chapter 1</strong>)</p>
+<p>The study of statistics is divided into two parts- <strong>Descriptive statistics</strong> and <strong>Inferential statistics</strong>.</p>
+<p><strong>Descriptive statistics</strong> is the branch of statistics that involves the organization, summarization, and display of data.<br>
+<strong>Inferential statistics</strong> is the branch of statistics that involves using a sample to draw conclusions about a population.</p>
+<p>A basic tool in the study of inferential statistics is <strong>probability</strong> and <strong>probability distribution</strong>s.</p>
+<p>The goal of inferential statistics is to draw conclusions from a sample and generalize them to the population. The most common methodologies used are hypothesis tests, Analysis of variance, etc.<br>
+<br>
+We will begin with <strong>descriptive statistics.</strong></p>
+<section id="descriptive-statistics" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">1.1</span> Descriptive statistics</h2>
+<p>An important aspect of dealing with data is organizing and summarizing the data in ways that facilitate its interpretation and subsequent analysis. This aspect of statistics is called <strong>descriptive statistics</strong>. Usually, data are summarized both <strong>numerically</strong> and <strong>graphically</strong>. &nbsp;In this module, our focus will be concentrated on the following topics:</p>
+<p>(i) Numerical Summaries of Data (ii) Graphical summaries (Histogram and &nbsp;Box Plot)</p>
+<p><strong>Numerical summaries of the data</strong></p>
+<p>Often to summarize data we use some numerical measures like measures of central tendency, measures of location and measures of variation. The common numerical summaries are:</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>1) Measures of central tendency</th>
+<th>2) Measures of relative standing: Quantile</th>
+<th>3) Measures of variability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean/ Arithmetic mean/average, Median, Mode etc</td>
+<td>a)Percentiles, Quartiles etc.</td>
+<td>a) Range, Inter-quartile range (IQR), Variance and standard deviation, Coefficient of variation (CV)% etc.</td>
+</tr>
+</tbody>
+</table>
+<p>While studying these numerical summaries, we consider <strong>sample data</strong>.</p>
+</section>
+<section id="measures-of-central-tendency-and-quantile" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="measures-of-central-tendency-and-quantile"><span class="header-section-number">1.2</span> Measures of central tendency and quantile</h2>
+<section id="mean" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">1.2.1</span> Mean</h3>
+<ul>
+<li><p><strong>Sample mean:</strong> Suppose <span class="math inline">\(n\)</span> observation of a variable <span class="math inline">\(X\)</span> is drawn from a population. Then the sample mean is denoted by <span class="math inline">\(\bar x\)</span> and</p>
+<p><span class="math display">\[
+\bar x =\frac{\sum x}{n}
+\]</span></p>
+<p>The sample mean <span class="math inline">\(\bar x\)</span> is a sample statistic.</p></li>
+<li><p><strong>Population mean:</strong> Suppose in a population there are <span class="math inline">\(N\)</span> values of variable <span class="math inline">\(X\)</span>. Then the population mean is denoted by <span class="math inline">\(\mu\)</span> and</p>
+<p><span class="math display">\[
+\mu =\frac{\sum x}{N}
+\]</span></p>
+<p>The <span class="math inline">\(\bar x\)</span> is a point estimator of the population mean <span class="math inline">\(\mu\)</span>.</p></li>
+</ul>
+<p><strong>Example 1.1:</strong> Eight prototype units are produced and their pull-off forces measured, resulting in the following data (in pounds): 12 .6, 12. 9, 13. 4, 12. 3, 13. 6, 13 .5, 12. 6, 13. 1.</p>
+<p>Suppose,<span class="math inline">\(X=\)</span>pull-off forces (in pounds). So,</p>
+<p><span class="math inline">\(X=\{x_1,x_2,...,x_8\}=\{12.6,12.9,…,13.1\}\)</span></p>
+<p>The sample mean is, pounds</p>
+<p><span class="math display">\[
+\bar x=\frac{\sum x}{n}=\frac{12.6+12.9+...+13.1}{8}=\frac{104}{8}=13.0 \ \ pounds
+\]</span></p>
+</section>
+<section id="median" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="median"><span class="header-section-number">1.2.2</span> Median</h3>
+<p>The <strong>median</strong> is another measure of central location. The median is the value in the middle when the data are arranged in ascending order (smallest value to largest value).</p>
+<ul>
+<li><p>For an <em>odd</em> number of observations, median is the <strong>middle</strong> <strong>value</strong></p></li>
+<li><p>For an <em>even</em> number of observations, median is the <strong>average of the two middle values</strong></p></li>
+</ul>
+<p><strong>Example 1.2:</strong> CPU time of 9 jobs (in seconds):<br>
+Data: 59, 139, 46, 37, 42, 30, 55, 56, 82<br>
+<strong>Arranged/sorted data:</strong> 30, 37, 42, 46, 55, 56, 59, 82, 139<br>
+<strong>Median=55</strong>; whereas the <strong>Mean=60.67</strong></p>
+<p><strong>Example 1.3 :</strong> CPU time of 10 jobs (in seconds): 59, 139, 46, 37, 42, 30, 55, 56, 36, 82<br>
+<strong>Arranged/sorted data:</strong> 30, 36, 37, 42, 46, 55, 56, 59, 82, 139.</p>
+<p><strong>Median</strong> = (46+55)/2=50.5; whereas <strong>Mean</strong>=58.2.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that the median is unaffected by the size of the largest CPU time. It impiles that, mean is affected by extreme value or outlier but median is not.</p>
+</div>
+</div>
+</section>
+<section id="mode" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="mode"><span class="header-section-number">1.2.3</span> <strong>Mode</strong></h3>
+<p>is the most frequently occurring data value.</p>
+</section>
+<section id="percentiles" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="percentiles"><span class="header-section-number">1.2.4</span> Percentiles</h3>
+<p>Percentiles divide the whole data set into approximately 100 equal parts. So, there are 99 percentiles -<span class="math inline">\(P_1, P_2,...,P_{99}\)</span>. In this lecture <span class="math inline">\(j^{th}\)</span> percentile will be denoted by <span class="math inline">\(P_j\)</span> .</p>
+<p>We can compute the <span class="math inline">\(j^{th}\)</span> percentile as follows:</p>
+<p><span class="math display">\[
+P_j=(j*\frac{n+1}{100})^{th} \ \ value; \ \ j=1,2,...,99.
+\]</span></p>
+<p><strong>Example 1.4:</strong> Compute the 25<sup>th</sup> and 60<sup>th</sup> percentile from the following data:</p>
+<p>CPU time of 9 jobs (in seconds): 59, 46, 37, 42, 30, 55, 56, 36, and 82.</p>
+<p><u><em>Solution:</em></u> Here, <span class="math inline">\(n=9\)</span>.</p>
+<p><strong>Sorted data:</strong> &nbsp;30, 36, 37, 42, 46, 55, 56, 59, and 82.</p>
+<p>So, <span class="math inline">\(P_{25}=(25*\frac{9+1}{100})^{th} \ \ value=2.5^{th} \ \ value\)</span></p>
+<p><span class="math inline">\(=2^{nd} \ \ value +0.5(3^{rd}-2^{nd})=36+0.5(37-36)=36.5\)</span>.</p>
+<p><u>Interpretation:</u> <span class="math inline">\(P_{25}=36.5\)</span> implies that approximately 25% of the total observations lie below or equal to 36.5.</p>
+<p>Similarly, <span class="math inline">\(P_{60}=(60*\frac{9+1}{100})^{th}\ \ value=6^{th}\ \ value=55\)</span>.</p>
+<p><u>Interpretation:</u> <span class="math inline">\(P_{60}=55\)</span> implies that approximately 60% of the total observations lie below or equal to 55.</p>
+</section>
+<section id="quartiles" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="quartiles"><span class="header-section-number">1.2.5</span> Quartiles</h3>
+<p>It is often desirable to divide data into four parts, with each part containing approximately one-fourth, or 25% of the observations. The division points are referred to as the quartiles and are defined as</p>
+<p><em>Q<sub>1</sub></em> = first quartile, or 25<sup>th</sup> percentile</p>
+<p><em>Q</em><sub>2</sub> = second quartile, or 50<sup>th</sup> percentile (also the median)</p>
+<p><em>Q</em><sub>3</sub> = third quartile, or 75<sup>th</sup> percentile.</p>
+<p><strong>Example 1.5:</strong> Here is the monthly starting salary ($) of 12 graduates:</p>
+<p>3450, 3550, 3650, 3480, 3355, 3310, 3490, 3730, 3540, 3925, 3520, 3480</p>
+<p>Compute Q1 and Q3 of the above data (<em>Will be solved in class</em>).</p>
+</section>
+</section>
+<section id="measures-of-variability" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="measures-of-variability"><span class="header-section-number">1.3</span> Measures of variability</h2>
+<p>Variability in data means lack of uniformity. It is also referred to as spread, scatter, or dispersion. We turn now to a discussion of some commonly used measures of variability.</p>
+<section id="range" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="range"><span class="header-section-number">1.3.1</span> Range</h3>
+<p><span class="math display">\[
+Range=Largest \ \ value-Smallest \ \ value
+\]</span></p>
+<ul>
+<li>Heavily influenced by extreme values</li>
+</ul>
+</section>
+<section id="inter-quartile-range-iqr" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="inter-quartile-range-iqr"><span class="header-section-number">1.3.2</span> Inter-quartile-range (IQR)</h3>
+<p><span class="math display">\[
+IQR=Q_3-Q_1
+\]</span></p>
+<ul>
+<li><p>It exhibits the variability in the middle 50% of the observations.</p></li>
+<li><p>The interquartile range is less sensitive to the extreme values in the sample than is the ordinary sample range.</p></li>
+</ul>
+<p><strong>Detection of outliers using 1.5(IQR) rule</strong></p>
+<p>In this method, we discuss fences<strong><em>.</em></strong></p>
+<ul>
+<li><p>The lower fence of distribution is 𝒍𝒐𝒘𝒆𝒓 𝒇𝒆𝒏𝒄𝒆, <span class="math inline">\(lf=Q_1-1.5(IQR)\)</span></p></li>
+<li><p>The upper fence of distribution is 𝒖𝒑𝒑𝒆𝒓 𝒇𝒆𝒏𝒄𝒆, <span class="math inline">\(uf=Q_3+1.5(IQR)\)</span></p></li>
+<li><p>If any value lies outside the interval <span class="math inline">\([lf,uf]\)</span>; then it will be considered an outlier.</p></li>
+</ul>
+<p><strong>Example 1.6:</strong> The following data set represents the number of new computer accounts registered during ten consecutive days.&nbsp; 43, 37, 50, 51, 58, 105, 52, 45, 45, 10. Check for outliers using the 1.5(IQR) rule.</p>
+</section>
+<section id="variance-and-standard-deviation" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="variance-and-standard-deviation"><span class="header-section-number">1.3.3</span> Variance and standard deviation</h3>
+<p>The variability or scatter in the data around mean may be described by the variance and standard deviation.</p>
+<ul>
+<li><p><strong>Population variance:</strong> If <span class="math inline">\(x_1, x_2, ...,x_N\)</span> is a <em>population</em> of <span class="math inline">\(N\)</span> observations , the population variance is</p>
+<p><span class="math display">\[
+\sigma^2=\frac{(x_1-\mu)^2+(x_2-\mu)^2+...+(x_N-\mu)^2}{N}
+\]</span></p>
+<p><span class="math display">\[
+=\frac{\sum_{i=1}^N (x_i-\mu)^2} {N}=\frac{\sum_{i=1}^N x_i^2}{N}-\mu^2
+\]</span></p></li>
+<li><p><strong>Sample variance:</strong> If <span class="math inline">\(x_1, x_2, ...,x_n\)</span> is a <em>sample</em> of <span class="math inline">\(n\)</span> observations , the sample variance is</p></li>
+</ul>
+<p><span class="math display">\[
+s^2=\frac{(x_1-\bar x)^2+(x_2-\bar x)^2+...+(x_n-\bar x)^2}{n-1}=\frac{\sum_{i=1}^n (x_i-\bar x)^2} {n-1}
+\]</span></p>
+<ul>
+<li>An alternative formula for the computation of the sample variance is:</li>
+</ul>
+<p><span class="math display">\[
+s^2=\frac{\sum x_i^2-n\bar x^2}{n-1}
+\]</span> where, <span class="math inline">\(\sum x_i^2=x_1^2+x_2^2+...+x_n^2\)</span></p>
+<p><strong>Example 1.7:</strong> Eight prototype units are produced and their pull-off forces measured, resulting in the following data (in pounds): 12 .6, 12. 9, 13. 4, 12. 3, 13. 6, 13 .5, 12. 6, 13. <strong>Compute</strong> sample variance.</p>
+<p><u>Solution:</u></p>
+<div id="tbl-tbl2.1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tbl2.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: Computation of the sample variance for the pull-off force data
+</figcaption>
+<div aria-describedby="tbl-tbl2.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Pull-off force(<span class="math inline">\(x_i\)</span>)</th>
+<th style="text-align: center;">Sample mean, <span class="math inline">\(\bar x\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((x_i-\bar x)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((x_i-\bar x)^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">12.6</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">-0.4</td>
+<td style="text-align: center;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12.9</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">-0.1</td>
+<td style="text-align: center;">0.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13.4</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">0.4</td>
+<td style="text-align: center;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12.3</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">-0.7</td>
+<td style="text-align: center;">0.49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13.6</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">0.6</td>
+<td style="text-align: center;">0.36</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">13.5</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">12.6</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">-0.4</td>
+<td style="text-align: center;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">13.1</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\sum (x_i-\bar x ) =0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\sum (x_i-\bar x )^2 =1.6\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><span class="math display">\[
+s^2=\frac{\sum (x_i-\bar x)^2}{n-1}=\frac{1.6}{8-1}=0.2286 \ \ (pounds)^2
+\]</span></p>
+<p><u>Alternative:</u> Here <span class="math inline">\(\sum x^2 =12.6^2+12.9^2+\cdot \cdot\cdot+13.1^2=1353.6\)</span></p>
+<p><span class="math inline">\(\bar x=13\)</span></p>
+<p>So, <span class="math inline">\(s^2=\frac{\sum x^2-n\times \bar x^2}{n-1}=\frac{1353.6-8\times (13^2)}{8-1}=0.2285714\approx 0.2286 \ \ (pounds)^2\)</span></p>
+<p><strong>Standard deviation</strong></p>
+<p>The <strong>standard deviation</strong> is defined to be the positive square root of the variance</p>
+<ul>
+<li><p><strong>Sample standard deviation=</strong><span class="math inline">\(s=\sqrt {s^2}\)</span></p></li>
+<li><p><strong>Population standard deviation=</strong><span class="math inline">\(\sigma =\sqrt {\sigma ^2}\)</span></p></li>
+</ul>
+<blockquote class="blockquote">
+<p><em>The sample standard deviation</em> <span class="math inline">\(s\)</span> <em>is the estimator of population standard deviation</em> <span class="math inline">\(\sigma\)</span><em>.</em></p>
+</blockquote>
+<p><strong>Example 1.8:</strong> The standard deviation of the previous example is :</p>
+<p><span class="math display">\[ s=\sqrt {0.2286} \approx0.48 \ \ pounds\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The standard deviation is easier to interpret than the variance because the standard deviation is measured in the same units as the data.</p>
+</div>
+</div>
+<p>For example, the sample variance for the pull-off force data of prototype units is <span class="math inline">\(s^2=0.2286 \ \ (pounds)^2\)</span>.</p>
+<p>Because the standard deviation is the square root of the variance, the units of the variance, pounds squared, are converted to pound in the standard deviation.</p>
+<p>Thus, the standard deviation of the pull-off force data is 0.48 pounds. In other words, the standard deviation is measured in the same units as the original data. For this reason the standard deviation is more easily compared to the mean and other statistics that are measured in the same units as the original data.</p>
+</section>
+<section id="coefficient-of-variation" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="coefficient-of-variation"><span class="header-section-number">1.3.4</span> Coefficient of variation</h3>
+<p>In some situations we may be interested in a descriptive statistic that indicates how large the standard deviation is relative to the mean. This measure is called the <strong>coefficient of variation</strong> and is usually expressed as a percentage.</p>
+<p><strong>Coefficient variation,</strong></p>
+<p><span class="math display">\[CV=\frac{Standard \ \ deviation}{Mean}\]</span></p>
+<ul>
+<li><p>The coefficient of variation is a relative measure of variability; it measures the standard deviation relative to the mean.</p></li>
+<li><p>In general, the coefficient of variation is a useful statistic for comparing the variability of variables that have different standard deviations and different means.</p></li>
+</ul>
+<p><strong>Example 1.9:</strong> The table at the left shows the population heights (in inches) and weights (in pounds) of the members of a basketball team. Find the coefficient of variation for the heights and the weights. Then compare the results.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Coefficient of variation</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Heights (inches)</strong></th>
+<th style="text-align: center;"><strong>Weights (pounds)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">72</td>
+<td style="text-align: center;">180</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">74</td>
+<td style="text-align: center;">168</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">68</td>
+<td style="text-align: center;">225</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">76</td>
+<td style="text-align: center;">201</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">74</td>
+<td style="text-align: center;">189</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">69</td>
+<td style="text-align: center;">192</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">72</td>
+<td style="text-align: center;">197</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">79</td>
+<td style="text-align: center;">162</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">174</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">69</td>
+<td style="text-align: center;">171</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">185</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">73</td>
+<td style="text-align: center;">210</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>The mean height <span class="math inline">\(\mu \approx 72.8 \ \ inches\)</span> with a standard deviation <span class="math inline">\(\sigma =3.3 \ \ inches\)</span>.</p>
+<p>The coefficient of variation for the heights is</p>
+<p><br>
+<span class="math inline">\(CV_{height}=\frac{\sigma}{\mu}.100\%=\frac{3.3}{72.8} . 100\% \approx 4.5\%\)</span>.</p>
+<p>The mean weight <span class="math inline">\(\mu \approx 187.8 \ \ pounds\)</span> with a standard deviation <span class="math inline">\(\sigma =17.7 \ \ pounds\)</span>.</p>
+<p>The coefficient of variation for the weights is</p>
+<p><span class="math inline">\(CV_{weight}=\frac{\sigma}{\mu}.100\%=\frac{17.7}{187.8}.100\% \approx9.4\%\)</span></p>
+<p><strong><em>Interpretation</em></strong> The weights (9.4%) are more variable than the heights (4.5%).</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="graphical-summaryvisualization" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="graphical-summaryvisualization"><span class="header-section-number">1.4</span> Graphical summary/visualization</h2>
+<p>Before diving into advanced analysis we should have a look at the data. Because ” A picture is worth a thousand words”. Often a summary of a collection of data via a graphical display can provide insight regarding the system from which the data were taken.</p>
+<section id="frequency-distributions-and-histograms" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="frequency-distributions-and-histograms"><span class="header-section-number">1.4.1</span> Frequency Distributions and Histograms</h3>
+<p>To construct a frequency distribution, we must divide the range of the data into intervals, which are usually called <strong>class intervals, cells</strong>, or <strong>bins,</strong> and count how many observations fall into each <strong>bin</strong>.</p>
+<p>The <strong>histogram</strong> is a visual display of the frequency distribution.</p>
+<ul>
+<li><p>A <strong>frequency histogram</strong> consists of columns, one for each <strong>bin</strong>, whose height is determined by the <strong>number</strong> of observations in the <strong>bin</strong>. [Frequency distribution]</p></li>
+<li><p>A <strong>relative frequency histogram</strong> has the same shape but a different vertical scale. Its column heights represent the <strong>proportion</strong> of all data that appeared in each bin. [Relative frequency distribution]</p></li>
+</ul>
+<p>What is the appropriate size of <strong>bins?</strong></p>
+<p>There are several rules, but one of them is, the number of bins, suppose <span class="math inline">\(k=\sqrt n\)</span>. We will discuss how to construct a frequency distribution, relative frequency distribution, and cumulative frequency distribution in the following example.</p>
+<p><strong>Example 1.10:</strong> The following data are the joint temperatures of the O-rings (°F) for each test firing or actual launch of the space shuttle rocket motor (from <em>Presidential Commission on the Space Shuttle Challenger Accident</em>, Vol. 1, pp.&nbsp;129–131):</p>
+<blockquote class="blockquote">
+<p>67, 40, 58, 76, 58, 70, 72, 67, 75, 70, 57, 83, 53, 45, 70, 81, 78, 76, 67, 73, 61, 52, 31, 67, 79, 75, 69, 84, 68, 80</p>
+</blockquote>
+<p><strong>To construct frequency distribution and others follow the steps:</strong></p>
+<p><strong>Step-1:</strong> Find the <strong>number bins</strong>, <span class="math inline">\(k=\sqrt n=\sqrt 30=5.48\approx 6\)</span> (round to nearest integer).</p>
+<p><strong>Step-2:</strong> Find the range of the data, <span class="math inline">\(R=Maximum-Minimum=84-31=53\)</span></p>
+<p><strong>Step-3:</strong> Determine <strong>bin width</strong>, <span class="math inline">\(w=\frac{R}{k}=\frac{53}{6}=8.83 \approx 10\)</span></p>
+<p><strong>Step-4:</strong> Define the <strong>bins</strong> in <strong><em>exclusive</em></strong> method, starting from a suitable data value close to lowest value, for example <strong>[30, 40), [40, 50), and so on</strong> until we have the highest data value.</p>
+<p><strong>Step-5:</strong> Now count the observation fall in each bin, using tally.</p>
+<div id="tbl-tbl2.2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tbl2.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.2: Frequency, Relative frequency, Cumulative frequency Distribution for the O-rings temperature data (n=30)
+</figcaption>
+<div aria-describedby="tbl-tbl2.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 26%">
+<col style="width: 13%">
+<col style="width: 21%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><p>Temperatures</p>
+<p>(in <sup>o</sup> F)</p></th>
+<th style="text-align: center;">Tally</th>
+<th style="text-align: center;">Frequency (f)</th>
+<th style="text-align: center;">Relative frequency (rf)</th>
+<th style="text-align: center;">Cumulative frequency (cf)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">[30,40)</td>
+<td style="text-align: center;">|</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.03</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">[40,50)</td>
+<td style="text-align: center;">||</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">[50,60)</td>
+<td style="text-align: center;"><del>||||</del></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.17</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">[60,70)</td>
+<td style="text-align: center;"><del>||||</del> ||</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">[70,80)</td>
+<td style="text-align: center;"><del>||||</del> <del>||||</del> |</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">0.37</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">[80,90)</td>
+<td style="text-align: center;">||||</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0.13</td>
+<td style="text-align: center;">30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">n=30</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="histogram" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="histogram"><span class="header-section-number">1.4.2</span> <strong>Histogram</strong></h3>
+<p><strong>The histogram</strong> provides a visual impression of the <strong>shape</strong> of the distribution of the measurements and information about the <strong>central tendency</strong> and scatter or <strong>dispersion</strong> in the data.</p>
+<p>The histogram from the previous example is shown in <a href="#fig-fig21" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-fig21" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1Introduction_to_statistics_1_files/figure-html/fig-fig21-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Frequency histogram of temperature (°F)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Histogram and shape of the distribution</strong></p>
+<p>When the sample size is large, the histogram can provide a reasonably reliable indicator of the general <strong>shape</strong> of the distribution or population of measurements from which the sample was drawn. (for detail <em>see</em> <span class="citation" data-cites="montgomery2014a">Montgomery and Runger (<a href="references.html#ref-montgomery2014a" role="doc-biblioref">2014</a>)</span> ).</p>
+<div id="fig-fig22" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ShapeDistribution.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Histograms for symmetric and skewed distributions
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="box-plot" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">1.4.3</span> Box-plot</h3>
+<p>The <strong>box plot</strong> is a graphical display that simultaneously describes several important features of a data set, such as <em>center</em>, <em>spread</em>, departure from <em>symmetry</em>, and identification of unusual observations or <em>outliers</em>.</p>
+<p>A box plot, sometimes called <em>box-and-whisker plots</em>, displays the <strong>three quartiles</strong>, <strong>the minimum/lower fence</strong>, and <strong>the maximum/upper fence</strong> of the data on a rectangular box, aligned either horizontally or vertically.</p>
+<p>If any value falls outside the <strong>fences</strong> then it will shown as a <strong>circle</strong> in the box-plot.</p>
+<p><strong>Example 1.11</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Variable-I</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Variable-II</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Suppose, X={10,15,14,18,17,12,16,15,19,21,32,12,58}</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1Introduction_to_statistics_1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Suppose, Y={5,8,14,15,18,17,16,14,15,21,21,35,17,16,20}</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1Introduction_to_statistics_1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="boxplot-and-skewness-of-the-data" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="boxplot-and-skewness-of-the-data"><span class="header-section-number">1.4.4</span> Boxplot and skewness of the data</h3>
+<p>When we discuss the frequency histogram we also learned about shape of the distribution. By visual inspection of boxplot we can also tell about the distribution shape of a variable. The following boxplots are the typycal examples of skewness of the data.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1Introduction_to_statistics_1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Comparative/Parallel box-plots</strong></p>
+<p>Box plots are very useful in graphical comparisons among data sets because they have high visual impact and are easy to understand.</p>
+<ul>
+<li>For instance, here the <strong>Life expectancy at birth (in year)</strong> of Afghanistan, Bangladesh, India and Pakistan is compared using a <strong>comparative box-plot</strong> from 1971 to 2007.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="1Introduction_to_statistics_1_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> What is/are your observation(s) from this above comparative box-plot?<br>
+</p>
+</section>
+</section>
+<section id="exercises-practice-as-more-as-you-can" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="exercises-practice-as-more-as-you-can"><span class="header-section-number">1.5</span> Exercises (Practice as more as you can)</h2>
+<p><strong>1.1 Define</strong> statistics, population, sample, descriptive and inferential statistics.</p>
+<p><strong>1.2</strong> Define data. Discuss the types of data with example.</p>
+<p><strong>1.3</strong> What are the common measures of location? When median is preferable to mean?</p>
+<p><strong>1.4</strong> What are the common measures of variation?</p>
+<p><strong>1.5 Define</strong> five-number summary. How to detect outliers using quartiles?</p>
+<p><strong>1.6</strong> The data contains the overall gallons per kilometer (GpK) of a medium-sized mobile home unit.</p>
+<p>35, 30, 37, 35, 34, 35, 35, 42,40, 37, 42, 38, 35, 34, 35, 34, 34.</p>
+<p><strong>Calculate</strong> and <strong>explain</strong> Median. <strong>Find</strong> the value above which 15% GpK values lie.</p>
+<p><strong>1.7</strong> In automobile mileage and gasoline-consumption testing, 13 automobiles were road tested for 300 miles in city driving conditions. The following data were recorded for miles-per-gallon (mpg) performance.</p>
+<blockquote class="blockquote">
+<p>13.2, 14.4, 15.2, 15.3, 15.3, 15.3, 15.9, 16.0, 16.1, 16.2, 16.2, 16.7, 16.8</p>
+</blockquote>
+<ol type="i">
+<li><p><strong>Construct</strong> a simple boxplot (in horizontal direction) of mpg. Are most of the automobiles’ mpg relatively low?</p></li>
+<li><p>Suppose you want to buy a new car and you don’t afford enough money, so the car’s mileage must be in <em>bottom</em> 10%. What should be the mileage of your car based on this data?</p></li>
+<li><p>Suppose you want to buy a new car which mileage must be in <em>top</em> 10%. What should be the mileage of your car based on this data?</p></li>
+</ol>
+<p><strong>1.8</strong> The data set lists the prices (in dollars) of 20 portable global positioning system (GPS) navigators.</p>
+<blockquote class="blockquote">
+<p>128, 100, 180, 150, 200, 90, 340, 105, 85, 270, 200, 65, 230, 150, 150, 120, 130, 80, 230, 200</p>
+</blockquote>
+<ol type="i">
+<li><p><strong>Construct</strong> a frequency distribution and percent frequency distribution of prices.</p></li>
+<li><p><strong>Draw</strong> a frequency histogram. What is your observation about price data?</p></li>
+</ol>
+<p><strong>1.9</strong> The lengths of power failures, in minutes, are recorded in the following table.</p>
+<blockquote class="blockquote">
+<p>18, 135, 15, 90, 78, 69, 98, 102, 83, 55, 28</p>
+</blockquote>
+<ol type="i">
+<li><p><strong>Compute</strong> sample mean and standard deviation</p></li>
+<li><p><strong>Compute</strong> sample median and IQR</p></li>
+<li><p>If you want to be in the bottom 10% of power failures in your residence, then what should be the cutoff value of power failure lengths in minutes?</p></li>
+</ol>
+<p><strong>1.10</strong> Sample annual salaries (in thousands of dollars) for entry-level electrical engineers in Boston and Chicago are listed.</p>
+<blockquote class="blockquote">
+<p><strong>Boston</strong> 70.4, 84.2, 58.5, 64.5, 71.6, 79.9, 88.3, 80.1, 69.9</p>
+<p><strong>Chicago</strong> 69.4, 71.5, 65.4, 59.9, 70.9, 68.5, 62.9, 70.1, 60.9</p>
+</blockquote>
+<p><strong>Find</strong> the coefficient of variation for each of the two data sets. Then <strong>compare</strong> the results.</p>
+<p><strong>1.11</strong> The shear strengths of 20 spot welds in a titanium alloy are as follows:</p>
+<blockquote class="blockquote">
+<p>5408 5431 5475 5442 5376 5388 5459 5422 5416 5435</p>
+<p>5420 5429 5401 5446 5487 5416 5382 5357 5388 5457</p>
+</blockquote>
+<p><strong>Construct</strong> a frequency histogram of shear strength data. <strong>Conclude</strong> whether the shear strength is approximately symmetric or not.</p>
+<p><strong>1.12</strong> The “cold start ignition time” of an automobile engine is being investigated by a gasoline manufacturer. The following times (in seconds) were obtained for a test vehicle:</p>
+<blockquote class="blockquote">
+<p>1.75, 1.92, 2.62, 2.35, 3.09, 3.15, 2.53, 1.91.</p>
+</blockquote>
+<p><strong>Check</strong> for outliers using the 1.5*IQR rule of cold start ignition time.</p>
+<p><strong>1.13</strong> The cylindrical compressive strength (in MPa) was measured for 11 beams. The results were:</p>
+<blockquote class="blockquote">
+<p>38.43, 38.43, 38.39, 38.83, 38.45, 38.35, 38.43, 38.31, 38.32, 38.48, 38.50.</p>
+</blockquote>
+<p><strong>i) Construct</strong> a simple boxplot and comment about the shape of the distribution of compressive strength.</p>
+<p><strong>ii) Compute</strong> sample mean, standard deviation and coefficient of variation&nbsp; (CV) compressive strength.</p>
+<p><strong>1.14</strong> The shear strengths (in N/m2) of 10 spot welds in a titanium alloy are:</p>
+<p>5408, 5431, 5475, 5442, 5376, 5388, 5459, 5422, 5416, 5435.</p>
+<p><strong>Compute</strong> sample mean, standard deviation and coefficient of variation of shear strength.</p>
+<p><strong>1.15</strong> An article describes an experiment to test the yield strength of circular tubes with caps welded to the ends. The first 18 yields (in kN) are:</p>
+<blockquote class="blockquote">
+<p>96, 96, 102, 102, 102, 104, 104, 108, 126,126, 128, 128, 140, 156, 160, 160, 164,170.</p>
+</blockquote>
+<p><strong>Construct</strong> a simple box-plot of yield strength. <strong>Find</strong> the value above which top 10% yield strength lie.</p>
+<p><strong>1.16</strong> The cylindrical compressive strength (in MPa) was measured for 11 beams. The results were:</p>
+<blockquote class="blockquote">
+<p>38.43, 38.43, 38.39, 38.83, 38.45, 38.35, 38.43, 38.31, 38.32, 38.48, 38.50.</p>
+</blockquote>
+<ol type="i">
+<li><p><strong>Compute</strong> 1st quartile, 3rd quartile and IQR.</p></li>
+<li><p><strong>Check</strong> for outlier (s).</p></li>
+<li><p><strong>Construct</strong> a box-plot, <strong>show</strong> the outliers and <strong>comment</strong> about the symmetry of the distribution.</p></li>
+</ol>
+<p><strong>1.17</strong> The following sample data presents the thickness (Å) of a metal layer on 20 silicon wafers resulting from a chemical vapor deposition (CVD) process. Scientists believe that the thickness is usually normally distributed having a bell-shaped distribution for a smooth process. <strong>Construct</strong> a frequency histogram of metal thickness data. <strong>Conclude</strong> whether the process is smooth or not.</p>
+<blockquote class="blockquote">
+<p>468, 459, 450, 453, 473, 454, 458, 438, 447, 463,</p>
+<p>445, 466, 456, 434, 471, 437, 459, 445, 454, 423</p>
+</blockquote>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-montgomery2014a" class="csl-entry" role="listitem">
+Montgomery, Douglas C., and George C. Runger. 2014. <em>Applied Statistics and Probability for Engineers</em>. Sixth edition. Hoboken, NJ: John Wiley; Sons, Inc.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./2Probability_2.html" class="pagination-link" aria-label="Probability">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

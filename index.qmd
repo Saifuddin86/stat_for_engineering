@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+This is an eBook developed for the undergrad students of engineering faculty to provide knowledge of statistics, probability, probability distributions, statistical inference, correlation and regression analysis,stochastic process and design and analysis of experiment with applications in the engineering field.
+
+The whole book is developed using R Programming Language [@Rlang].

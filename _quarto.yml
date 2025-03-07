@@ -1,0 +1,56 @@
+project:
+  type: book
+
+book:
+  title: "Statistics and Probability for Engineering"
+  author: 
+    - name: Mohammad Saifuddin, Assistant Professor
+      email: saifuddin@bubt.edu.bd
+      affiliations: 
+        - name: Dept. of Math & Stat (BUBT)
+  
+  chapters:
+    - index.qmd
+    - 1Introduction_to_statistics_1.qmd
+    - 2Probability_2.qmd
+    - 3Random_variable_3.qmd
+    - 4Some_special_discrete_random_variables_4.qmd
+    - 5Continuous_rv_5.qmd
+    - 6Some_special_continuous_rv.qmd
+    - 7Further_Topics_on_R.vs.qmd
+    - summary.qmd
+    - references.qmd
+
+  downloads: [pdf, epub]
+  sidebar:
+    pinned: true
+    tools:
+      - icon: save
+        menu:
+          - text: ""
+            url:  "#"
+          - text: ""
+            url:  "#"
+          - text: ""
+            url:  "#"
+            
+  repo-url: https://www.rstudio.com/   
+  search: 
+    location: sidebar
+    type: textbox
+
+bibliography: references.bib
+
+execute: 
+  echo: false
+  warning: false
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
+

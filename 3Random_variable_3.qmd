@@ -1,0 +1,183 @@
+# Random variable: Discrete
+
+In many situations, it is desirable to assign a numerical value to each outcome of a random experiment. Such an assignment is called a **random variable.**
+
+Mathematically, a random variable is a **real-valued function** of the experimental outcome.
+
+**Definition:** A random variable is a function that associates a real number with each element in the sample space.
+
+::: callout-note
+We shall use a capital letter, say $X$, to denote a random variable and its corresponding small letter, $x$ in this case, for one of its values.
+:::
+
+**Illustration:** Two balls are drawn in succession without replacement from an urn containing 4 red balls and 3 black balls.
+
+-   Let, $Y$ is the number of red balls.
+
+-   The small letter $y$ is the numerical value for each possible outcomes.
+
+The possible outcomes and the values of $y$ of the random variable $Y$ are:
+
+| **Sample space** | $y$ |
+|:----------------:|:---:|
+|       $RR$       |  2  |
+|       $RB$       |  1  |
+|       $BR$       |  1  |
+|       $BB$       |  0  |
+
+Since the values of $Y$ is determined by a random experiment so, $Y$ is a random variable (discrete).
+
+## **Types of random variable** {#sec-types-of-random-variable}
+
+There are two important types of random variables, **discrete** and **continuous**.
+
+A **discrete random variable** is one whose possible values form a discrete set; in other words, the values can be ordered, and there are gaps between adjacent values. The random variable Y, just described, is discrete.
+
+In contrast, the possible values of a **continuous random variable** always contain an interval, that is, all the points between some two numbers.
+
+## Discrete random variable and Probability mass function
+
+Suppose $X$ is a discrete random variable. The **probability mass function (PMF)** of $X$ can be denoted as $f(x)$ where
+
+$$
+f(x)=P(X=x)
+$$For each possible outcome $x$ ; $f(x)$ must satisfies:
+
+1.  $$f(x) \ge 0$$
+
+2.  $$\sum _x f(x)=1$$
+
+### The Cumulative Distribution Function of a Discrete Random Variable
+
+A function called the **cumulative distribution function (CDF)** specifies the probability that a random variable is less than or equal to a given value. The cumulative distribution function of the random variable $X$ is the function
+
+-   $F(x) = P(X \le x)$
+
+**Example 3.1: Calculating probabilities** A certain industrial process is brought down for recalibration whenever the quality of the items produced falls below specifications. Let $X$ represent the number of times the process is recalibrated during a week, and assume that $X$ has the following probability mass function.
+
+| $x$    |  0   |  1   |  2   |  3   |  4   |
+|--------|:----:|:----:|:----:|:----:|:----:|
+| $f(x)$ | 0.35 | 0.25 | 0.20 | 0.15 | 0.05 |
+
+Compute the following :
+
+i\) $P(X=2)$;
+
+ii\) $P(X<3)$ and $P(X>2)$;
+
+iii\) $F(2)$
+
+**Example** [@walpole2017, **Example 3.8**]A shipment of 20 similar laptop computers to a retail outlet contains 3 that are defective. If a school makes a random purchase of 2 of these computers, **find** the probability distribution for *the number of defectives*.
+
+***Solution:*** Let $X$ be a random variable whose values x are the possible numbers of defective computers purchased by the school. Then $x$ can only take the numbers 0, 1, and 2. Now ,
+
+$P(X=0)=f(0)=P(N,N)=\frac{\binom{17}{2}\binom{3}{0}}{\binom{20}{2}}=\frac{136}{190}$
+
+$P(X=1)=f(1)=P(D,N)=\frac{\binom{3}{1}\binom{17}{1}}{\binom{20}{2}}=\frac{51}{190}$
+
+$P(X=2)=f(2)=P(D,D)=\frac{\binom{3}{2}\binom{17}{0}}{\binom{20}{2}}=\frac{3}{190}$
+
+Thus, the probability distribution of X is
+
+| $x$    |         0         |        1         |        2        |
+|--------|:-----------------:|:----------------:|:---------------:|
+| $f(x)$ | $\frac{136}{190}$ | $\frac{51}{190}$ | $\frac{3}{190}$ |
+
+**Example** [@baron2019, **Exercise 3.1 (a)**] A computer virus is trying to corrupt two files. The first file will be corrupted with probability 0.4. Independently of it, the second file will be corrupted with probability 0.3.
+
+Compute the probability mass function (**PMF**) of $X$, *the number of corrupted files*.
+
+***Solution: (Will be discussed in class)***
+
+### Expectation (Population Mean) of discrete random variable
+
+Let $X$ be a discrete random variable with probability mass function $f(x) = P(X = x)$.
+
+The mean of $X$ is given by
+
+$$\mu=\sum_x x.f(x)$$\
+The mean of $X$ is sometimes called the expectation, or expected value, of X and may also be denoted by $E(X)$ or by $\mu$.
+
+**Example 3.2 :** Let $X$ represent the number of times the process is recalibrated during a week, and assume that $X$ has the following probability mass function.
+
+| $x$    |  0   |  1   |  2   |  3   |  4   |
+|--------|:----:|:----:|:----:|:----:|:----:|
+| $f(x)$ | 0.35 | 0.25 | 0.20 | 0.15 | 0.05 |
+
+Compute the **mean** or **expected value** of $X$.
+
+[Solution:]{.underline}
+
+The **expected value** of $X$ is:
+
+$$
+\mu =E[X]=\sum_{x=0}^4 x.f(x) 
+$$
+
+$$
+=0(0.35)+1(0.25)+2(0.20)+3(0.15)+4(0.05)=1.30
+$$
+
+### Variance (population) of discrete random variable
+
+Let $X$ be a discrete random variable with probability distribution $f(x)$ and mean $\mu$. The variance of $X$ is
+
+$$
+var(X)=\sigma^2 =E[(X-\mu)^2]=E(X^2)-\mu^2
+$$ Where,
+
+$$E(X^2)=\sum_{x} x^2.f(x)$$\
+
+**Example 3.2 :** Let $X$ represent the number of times the process is recalibrated during a week, and assume that $X$ has the following probability mass function.
+
+| $x$    |  0   |  1   |  2   |  3   |  4   |
+|--------|:----:|:----:|:----:|:----:|:----:|
+| $f(x)$ | 0.35 | 0.25 | 0.20 | 0.15 | 0.05 |
+
+: Compute the **expected value** and **variance** of $X$.
+
+[Solution:]{.underline} From Example 3.1, we have
+
+Expected value of $X$ is $\mu =E(X)=1.30$
+
+Now, $$E(X^2)=\sum_{x=0}^4 x^2.f(x)$$
+
+$=0^2(0.35)+1^2 (0.25)+2^2 (0.20)+3^2 (0.15)+4^2 (0.05)$
+
+$=3.20$
+
+Hence, $var(X)=\sigma^2 =E(X^2)-\mu^2=3.20-(1.30)^2=1.51$
+
+-   The standard deviation is the square root of the variance:
+
+    $\sigma=\sqrt {var(X)}$
+
+::: callout-note
+## Properties of E(.) and var(.)
+
+If $a$ and $b$ are constants, then
+
+a\) $E(b)=b$
+
+b\) $E(aX+b)=aE(X)+b$
+
+c\) $var(b)=0$
+
+d\) $var(aX+b)=a^2 \ \ var (X)$
+:::
+
+**Example** Computer chips often contain surface imperfections. For a certain type of computer chip, the probability mass function of the number of defects X is presented in the following table.
+
+| $x$    | **0** | **1** | **2** | **3** | **4** |
+|--------|:-----:|:-----:|:-----:|:-----:|:-----:|
+| $f(x)$ |  0.4  |  0.3  | 0.15  |  0.1  | 0.05  |
+
+a\. Find $P(X \le 2)$.
+
+b\. Find $P(X > 1)$.
+
+c\. Find expected value/average of $X$.
+
+d\. Find variance and standard deviation of $X$.
+
+e\. Also find $E(2X+5)$ and $var(2X+5)$.\

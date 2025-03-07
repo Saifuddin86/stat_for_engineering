@@ -1,0 +1,173 @@
+---
+title: "Normal distribution (old)"
+author: "MSU"
+---
+
+**Definition**
+
+A continuous random variable say $X$ is said to be normally distributed if it has the following PDF:
+
+$$ f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}; -\infty<x<+\infty $$
+
+![**Figure: Normal curve**](Normal_curve.png){alt="Figure: Normal curve" width="50%" fig-align="left"}
+
+The normal curve has two parameters, $\mu$ and $\sigma$. They determine the location and shape of the normal distribution.
+
+-   **We write,** $X\sim N(\mu,\sigma)$
+-   $E(X)=\mu$
+-   $Var(X)=\sigma^2$
+
+### **Standard normal distribution**
+
+If $X\sim N(\mu,\sigma)$ then $Z\sim N(0,1)$ ,where
+
+$$Z=\frac{(X-\mu)}{\sigma}$$ The r.v $Z$ is called **standard normal variable**.
+
+-   **PDF of** $Z$: $f(z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}};-\infty<z<+\infty$
+
+-   **CDF of** $Z$: $\Phi(z)=P(Z\le z)=\int_{-\infty}^{z}f(z)dz$
+
+*Due to symmetry*, $\Phi(-z)=1-\Phi(z)$
+
+-   $E(Z)=0$
+
+-   $Var(Z)=1$
+
+### **Area under standard normal curve**
+
+For a given value of $z$, $\Phi(z)$ can be easily evaluated from z-table or calculator. *For example*,
+
+-   $P(Z\le 1.5)=\Phi(1.5)=0.9332$
+
+-   $P(Z\ge 1.5)=1-P(<1.5)=1-\Phi(1.5)=1-0.9332=0.0668$
+
+    *Alternative:* $P(Z\ge 1.5)=P(Z< -1.5)=\Phi(-1.5)=$ `r round(pnorm(-1.5),4)`
+
+-   $P(-1.8<Z<2.1)=\Phi(2.1)-\Phi(-1.8)=$ `r round(pnorm(2.1),4)`-`r round(pnorm(-1.8),4)`=`r round(pnorm(2.1),4)-round(pnorm(-1.8),4)`
+
+### **Area under normal curve**
+
+Suppose, $X \sim N(\mu, \sigma^2)$. Then
+
+$$ P(X\le x)=P(\frac{X-\mu}{\sigma}\le \frac{x-\mu}{\sigma})=P(Z\le \frac{x-\mu}{\sigma})=\Phi(\frac{x-\mu}{\sigma}) $$
+
+*Due to symmetry*,
+
+$$ P(X\ge x)=\Phi(\frac{\mu-x}{\sigma}) $$
+
+**Example:** Suppose, $X \sim N(10, 2)$. Find $P(X<8)$, $P(X>14)$, $P(10<X<12)$.
+
+*Solution:*
+
+We know, $P(X\le x)=\Phi(\frac{x-\mu}{\sigma})$ and $P(X\ge x)=\Phi(\frac{\mu-x}{\sigma})$
+
+So,
+
+-   $P(X<8)=\Phi(\frac{8-10}{2})=\Phi(-1)=$ `r round(pnorm(-1),4)`
+
+-   $P(X>14)=\Phi(\frac{10-14}{2})=\Phi(-2)=$ `r round(pnorm(-2),4)`
+
+-   $P(10<X<12)=\Phi(\frac{12-10}{2})-\Phi(\frac{10-10}{2})=\Phi(1)-\Phi(0)=0.3413$
+
+**Your turn:** Suppose, $X \sim N(10, 2)$. Find P(X\>14) and P(9\<X\<11).
+
+**Using the Normal Curve in Reverse**
+
+We know, $P(Z\le z)=\Phi(z)$.
+
+Suppose, $z$ is *unknown* and it is given that, $\Phi(z)=p$.
+
+Then, $z=\Phi^{-1}(p)$
+
+**Example:** Given, $P(Z \le z)=0.9495$. Find the value of $z$.
+
+*Solution:*
+
+We know $P(Z\le z)=\Phi(z)$.
+
+Given, $\Phi(z)=0.9495$
+
+$\therefore z=\Phi^{-1}(p)=\Phi^{-1}(0.9495)=1.64$ \[*From z-table, or calculator*\]
+
+**Exercise 6.7**[@walpole2017] Given a standard normal distribution, find the value of $k$ such that:
+
+(a) $P (Z > k) = 0.2946$;
+(b) $P (Z <k) = 0.0427$;
+(c) $P (-0.93 < Z < k) = 0.7235$.
+
+**Relation with X**
+
+If, $P(X\le x)=p$; then
+
+$x=\mu+z*\sigma$; where, $z=\Phi^{-1}(p)$
+
+**Exercise 6.9**[@walpole2017] Given the normally distributed variable $X$ with mean 18 and standard deviation 2.5, find:
+
+(a) P (X \< 15); (b) the value of k such that P (X \< k) = 0.2236;
+(b) the value of k such that P (X \> k) = 0.1814;
+
+**Finding percentiles:** Given,$X\sim N(20,4)$. Compute 75th percentile ($P_{75}$)
+
+**Solution** To find $P_{75}$, we have to solve the following equation:
+
+$P(X \le P_{75})=0.75$
+
+$\Rightarrow P_{75}=\mu+ z*\sigma$; where $z=\Phi ^{-1}(0.75)$=`r round(qnorm(0.75),2)`
+
+$\Rightarrow P_{75}=20+ (0.67)*4=22.68$
+
+```{r echo=FALSE} #| fig-height: 4 #| fig-width: 5  curve(dnorm(x,20,4),5,35,ylab = "f(x)",       main=expression(paste(75^th, percentile,(P[75])," ",of," " ,X))) axis(1,at=seq(5,35,1),labels = NA) nx<-seq(5,qnorm(0.75,20,4),.01) lines(nx,dnorm(nx,20,4),type = "h",col="grey70") text(qnorm(0.75,15,4),.02,expression(paste(P(X<=P[75]),"=0.75"))) text(qnorm(0.75,20,4),0,expression(paste(P[75],"=22.68")))}
+```
+
+**H.W:** Given,$X\sim N(18,2.5)$. Find $50^{th}$ percentile ($P_{50}$) and $90^{th}$ percentile ($P_{90}$) of $X$.
+
+### **Applications of the Normal Distribution**[@walpole2017]
+
+**Example 6.7**: A certain type of storage battery lasts, on average, 3.0 years with a standard deviation of 0.5 year. Assuming that battery life is normally distributed, find the probability that a given battery will last less than 2.3 years.
+
+**Example 6.8** : An electrical firm manufactures light bulbs that have a life, before burn-out, that is normally distributed with mean equal to 800 hours and a standard deviation of 40 hours. Find the probability that a bulb burns between 778 and 834 hours.
+
+**Example 6.9** : In an industrial process, the diameter of a ball bearing is an important measurement. The buyer sets specifications for the diameter to be $3.0 \pm 0.01$ cm. The implication is that no part falling outside these specifications will be accepted. It is known that in the process the diameter of a ball bearing has a normal distribution with mean $\mu = 3.0$ and standard deviation $\sigma = 0.005$. On average, how many manufactured ball bearings will be scrapped?
+
+**Example 6.10** : Gauges are used to reject all components for which a certain dimension is not within the specification $1.50 \pm d$. It is known that this measurement is normally distributed with a mean of 1.50 and a standard deviation of 0.2. Determine the value d such that the specifications "cover" 95% of the measurements.
+
+**Solution:**
+
+Let, $X=measurement \ \ of \ \ certain \ \ dimension$
+
+Given, $X\sim N(1.5,0.2)$
+
+According to question,
+
+$P(1.5-d<X<1.5+d)=0.95$
+
+So, $P(X<1.5-d)+P(X>1.5+d)=0.05$
+
+![](Walpole%20Example%206.10.png)
+
+So, $P(X <1.5-d)=0.025$
+
+$\implies 1.5-d=\mu+z*\sigma$
+
+$\implies 1.5-d=1.5+(-1.96)*0.2$.
+
+\[Since,$z=\Phi^{-1}(0.025)=-1.96$\]
+
+$\implies 1.5-d=1.108$
+
+$\therefore d=0.392$
+
+**Exercise 6.11** : A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,
+
+(a) what fraction of the cups will contain more than 224 milliliters?
+(b) what is the probability that a cup contains between 191 and 209 milliliters?
+(c) how many cups will probably overflow if 230-milliliter cups are used for the next 1000 drinks?
+(d) below what value do we get the smallest 25% of the drinks?
+
+**Exercise 6.14** The finished inside diameter of a piston ring is normally distributed with a mean of 10 centimeters and a standard deviation of 0.03 centimeter.
+
+(a) What proportion of rings will have inside diameters exceeding 10.075 centimeters?
+(b) What is the probability that a piston ring will have an inside diameter between 9.97 and 10.03 centimeters?
+(c) Below what value of inside diameter will 15% of the piston rings fall?
+
+**Exercise 6.17** : The average life of a certain type of small motor is 10 years with a standard deviation of 2 years. The manufacturer replaces free all motors that fail while under guarantee. If she is willing to replace only 3% of the motors that fail, how long a guarantee should be offered? Assume that the lifetime of a motor follows a normal distribution.
