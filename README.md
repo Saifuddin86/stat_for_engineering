@@ -1,3 +1,3 @@
 ## README
 
-This is an Lecture manual of Statistics and Probablity for undergrad students of Engineering discipline. 
+This is a Lecture manual of Statistics and Probability for undergrad students of Engineering discipline. 
