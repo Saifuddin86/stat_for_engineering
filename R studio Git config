@@ -1,0 +1,20 @@
+R studio Git config
+
+1. Check GPG Configuration: Ensure that Git is configured to use the correct GPG program. You can set the GPG program path in your Git configuration:
+
+git config --global gpg.program "C:/Program Files (x86)/GnuPG/bin/gpg.exe"
+
+2. Verify Secret Key: Make sure that your secret key is available and correctly configured. You can list your secret keys with the following command:
+
+gpg --list-secret-keys --keyid-format LONG
+
+
+3. Set Signing Key: Configure Git to use the correct signing key:
+
+git config --global user.signingkey YOUR_KEY_ID
+
+
+4. Check GPG Agent: Ensure that the GPG agent is running and properly configured. Sometimes, restarting the GPG agent can help:
+
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
