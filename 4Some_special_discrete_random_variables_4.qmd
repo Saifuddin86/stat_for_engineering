@@ -65,9 +65,13 @@ Suppose $X=number \ \ of \ \ successs \ \ in \ \ n\ \ trials$. Then $X$ is calle
 
 **CDF**: $P(X\le x)=F(x)=f(0)+f(1)+...+f(x)$
 
-**Mean:** $E(X)=np$
+**Properties**
 
-**Variance:** $Var(X)=np(1-p)$
+**a)** $\sum_{x=0}^n f(x)=\sum_{x=0}^n \binom {n}{x} p^x (1-p)^{n-x}$
+
+**b) Mean:** $E(X)=np$
+
+**c) Variance:** $Var(X)=np(1-p)$
 
 [**We write**]{.underline} $X\sim Bin (n,p)$
 
@@ -261,6 +265,179 @@ Now,
 
 *And so on....*
 
+## Geometric r.v
+
+The number of Bernoulli trials needed to get the first success has Geometric distribution.
+
+Let $X$ be the number of trials needed to get the *first* success.
+
+**PMF:**
+
+$P(X=x)=P(the\ \ 1^{st} \ \ success \ \ occurs \ \ in \ \ the \ \ x^{th\ \ trial})$
+
+$$
+f(x)=(1-p)^{x-1} p\ \ ;x=1,2,..., \infty
+$$ {#eq-geometric}
+
+**Properties**
+
+a\) $\sum_{x=1}^\infty f(x)=\sum_{x=1}^\infty (1-p)^{x-1}p=1$
+
+b\) $E(X)=\frac{1}{p}$
+
+c\) $Var(X)=\frac{1-p}{p^2}$
+
+[We write,]{.underline} $X\sim Geom(p)$
+
+**Probability plot for different values of** $p$
+
+```{r fig.width=8, fig.height=3}
+##| label: fig-figgeom
+##| fig-height: 3
+
+#rm(list = ls())
+
+library(tidyverse)
+trials <- 1:10
+
+fx=0
+gx=function(x,p){
+  for (i in x) {
+  fx[i]=p*(1-p)^(x[i]-1)
+  }
+  fx
+}
+
+
+#gx(c(1,2,3),0.9)
+
+#gx(trials,0.9)
+
+g1<-gx(trials,0.75)
+g2<-gx(trials,0.5)
+g3<-gx(trials,0.25)
+
+
+g_wide.df<-data.frame(trials,g1,g2,g3)
+#wide.df
+g_wide.long<-g_wide.df%>%gather(key = "p",value = "prob",-trials)
+#head(wide.long)
+
+
+#g_wide.long %>% str()
+
+g_wide.long%>%ggplot(aes(trials,prob))+
+        geom_col(width = 0.4,fill="black")+
+        facet_wrap(~p,labeller = as_labeller(
+          c("g1"="p=0.75","g2"="p=0.50","g3"="p=0.25")
+        )
+                   )+
+        scale_x_continuous(breaks =1:10)+
+        labs(x="x = # of trials",y="f(x)",
+             title = "Probability plot of Geometric distribution for different values of p", 
+             #subtitle =expression(n==10)
+             )+
+  theme_bw()+
+  theme(axis.title = element_text(face = "italic"),
+                         plot.background = element_rect(color = "black"))
+
+```
+
+The probability plot illustrates that as the value of ($p$) increases, the likelihood of achieving the first success at an earlier trial also increases.
+
+**Memorylessness property of Geometric distribution**
+
+Let $X$ be the number of trials needed to get the *first* success and $X\sim Geom(p)$ .Suppose that we have been watching the process for $n$ trials and no success has been recorded. What is the probability that in additional $k$ trials we will observe the *first* success? Mathematically,
+
+$$
+P(X=n+k|X>n)=?
+$$
+
+It can be shown that:
+
+$$
+P(X=n+k|X>n)=P(X=k)
+$$
+
+It implies that the probability of needing $k$ more trials, given that we've already had $n$ failures, is the same as the original probability of needing $k$ trials to get the *first* success. This is known as **memorylessness** **property.**
+
+\
+**Real life examples**
+
+-   A search engine goes through a list of sites looking for a given key phrase. Suppose the search terminates as soon as the key phrase is found. The number of sites visited is Geometric.
+
+-   A hiring manager interviews candidates, one by one, to fill a vacancy. The number of candidates interviewed until one candidate receives an offer has Geometric distribution.
+
+**Example 5.15 (Walpole):** For a certain manufacturing process, it is known that, on the average, 1 in every 100 items is defective. What is the probability that the fifth item inspected is the first defective item found?
+
+**Example 5.16 (Walpole):** At a “busy time,” a telephone exchange is very near capacity, so callers have difficulty placing their calls. It may be of interest to know the number of attempts necessary in order to make a connection. Suppose that we let *p* = 0*.*05 be the probability of a connection during a busy time. *We are interested in knowing the probability that 5 attempts are necessary for **a successful call.***
+
+Quite often, in applications dealing with the geometric distribution, the mean and variance are important. For example, in **Example 5.16,** the *expected* number of calls necessary to make a connection is quite important. So, we can easily compute mean and variance of a Geometric r.v.
+
+**Exercise 5.55 (Walpole)** The probability that a student pilot passes the written test for a private pilot’s license is 0.7. Find the probability that a given student will pass the test
+
+\(a\) on the third try;
+
+\(b\) before the fourth try
+
+**Exercise 3.24 (Michael Baron).** An internet search engine looks for a certain keyword in a sequence of independent web sites. It is believed that 20% of the sites contain this keyword. Compute the probability that the search engine had to visit at least 5 sites in order to find the first occurrence of a keyword.
+
+**A memoryless Customer Service Call center**
+
+A customer calls a tech support center, which takes independent attempts to resolve an issue. On each call, there is a 20% chance that the issue is resolved.
+
+(a) What is the probability that the issue will be resolved after the 4th call?
+(b) Suppose the customer has already called 4times and the issue is still unresolved. What is the probability that it will still take more than 3 additional calls to get the issue resolved?
+(c) Explain why the answer in (b) makes sense in terms of the memoryless property.
+
+::: callout-note
+## Derivation and proofs related to Geometric distribution
+
+**1) Memorylessness property**
+
+***Proof:***
+
+PMF of Geometric r.v is : $f(x)=q^{x-1} p \ \ ; x=1,2,...,\infty$ with $q=1-p$.
+
+Now,
+
+$P(X=n+k|X>n)=\frac{P(\{X=n+k\} \cap  \{X>n\} )}{P(X>n)}=\frac{P(X=n+k)}{P(X>n)}$
+
+$=\frac{q^{n+k-1}}{q^n (1-q)^{-1}}=\frac{q^{k-1}}{p^{-1}}=q^{k-1}p=P(X=k)$
+
+$\therefore P(X=n+k|X>n)=P(X=k)$\
+
+**2) Mean of geometric distribution**
+
+Remember the geometric series :
+
+$1+q+q^2+q^3+....=\sum_{x=0}^\infty q^{x}=\frac{1}{1-q}=(1-q)^{-1}$
+
+Now,
+
+$$
+\frac{d}{dq} \sum_{x=0}^{\infty} q^{x}=\frac{d}{dq}(1-q)^{-1}
+$$
+
+$$
+Or,\sum_{x=1}^{\infty} xq^{x-1}=(1-q)^{-2}\ \ ...(A)
+$$
+
+So, $E(X)=\sum_{x=1}^{\infty} x\cdot q^{x-1} p=p\sum_{x=1}^{\infty} x\cdot q^{x-1}=p(1-q)^{-2}$
+
+$=pp^{-2}=p^{-1}=\frac{1}{p}$
+
+**3) Variance**
+
+$Var(X)=E(X^2)-[E(X)]^2=E[X(X-1)]+E(X)-[E(X)]^2 \ \ ...(B)$
+
+To derive the variance of geometric distribution, differentiate (A) w.r.t $q$ again. After some manipulation and using (B) we will have
+
+$$
+Var(X)=\frac{1-p}{p^2}
+$$
+:::
+
 ## Poisson r.v
 
 The number of events occur randomly in an interval or in a region usually follows Poisson distribution. A famous French mathematician *SimB4eon-Denis Poisson* (1781--1840) first introduced this distribution.
@@ -419,5 +596,9 @@ $P(X<7)=f(0)+f(1)+...+f(6)=F(6)=0.313$ (*Ans.*)
 **Exercise 5.87:**[@walpole2017] Imperfections in computer circuit boards and computer chips lend themselves to statistical treatment. For a particular type of board, the probability of a diode failure is 0.03 and the board contains 200 diodes.
 
 (a) What is the mean number of failures among the diodes? (***Ans:*** $\mu=np=200*0.03=6$)
+
 (b) What is the variance?(***Ans:*** $\sigma^2=np(1-p)=200*0.03*(1-0.03)=5.82$)
-(c) The board will work if there are no defective diodes. What is the probability that a board will work? ***Ans (c):*** The board will work if there are no defective diodes. So, P(The board will work)=$P(X=0)=f(0)=e^{-\mu}=e^{-6}=0.0025$.
+
+(c) The board will work if there are no defective diodes. What is the probability that a board will work? ***Ans (c):*** The board will work if there are no defective diodes.
+
+    So, P(The board will work)=$P(X=0)=f(0)=e^{-\mu}=e^{-6}=0.0025$.

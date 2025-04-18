@@ -34,7 +34,8 @@ library(reticulate)
 #| echo: true
 set.seed(42)
 
-hist(rnorm(1000),freq = FALSE,ylim = c(0,.4),breaks = 10,col = "steelblue")
+hist(rnorm(1000),freq = FALSE,ylim = c(0,.4),
+     breaks = 10,col = "steelblue",main = "Histogram of Normal distribution")
 lines(density(rnorm(1000)),col="blue",lwd=2)
 
 ```
@@ -62,7 +63,7 @@ n_rv = np.random.normal(loc=0, scale=1, size=1000)
 
 ## Using `seaborn`
 
-sns.histplot(n_rv, kde=True,stat="probability",bins=10)
+sns.histplot(n_rv, kde=True,stat="density",bins=10)
 plt.title("Histogram of Normal Distribution")
 plt.legend()
 plt.show()
