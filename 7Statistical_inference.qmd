@@ -195,7 +195,7 @@ pclt_3
 
 From @fig-cltsim we can see that as the sample size increases, the sampling distribution of **sample mean** tends to bell-shaped or normal though the population data was very skewed to the right. This simulation clearly demonstrate the fact of Central Limit Theorem (CLT).
 
-For more interactive simulation of **CLT** please visit the [Click here to visit the ShinyApp for Central Limit Theorem Simulation](https://saifuddin24.shinyapps.io/CLT_Sim/).
+For more interactive simulation of **CLT** please  [click here to visit the ShinyApp for Central Limit Theorem Simulation](https://saifuddin24.shinyapps.io/CLT_Sim/).
 :::
 
 **Problem 7.1** An electronics company manufactures resistors that have a mean resistance of 100 ohms and a standard deviation of 10 ohms. The distribution of resistance is normal. **Find** the probability that a random sample of n = 25 resistors will have an average resistance of fewer than 95 ohms.
