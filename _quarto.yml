@@ -5,10 +5,11 @@ book:
   title: "Statistics and Probability for Engineering"
   author: 
     - name: Mohammad Saifuddin, Assistant Professor
-      email: saifuddin@bubt.edu.bd
       affiliations: 
         - name: Dept. of Math & Stat (BUBT)
+      #url: https://github.com/Saifuddin86
   
+  #cover-image: cover.jpg
   chapters:
     - index.qmd
     - 1Introduction_to_statistics_1.qmd
@@ -17,7 +18,8 @@ book:
     - 4Some_special_discrete_random_variables_4.qmd
     - 5Continuous_rv_5.qmd
     - 6Some_special_continuous_rv.qmd
-    - 7Further_Topics_on_R.vs.qmd
+    - 7Statistical_inference.qmd
+    - 77Further_Topics_on_R.vs.qmd
     - summary.qmd
     - references.qmd
 
@@ -34,7 +36,7 @@ book:
           - text: ""
             url:  "#"
             
-  repo-url: https://www.rstudio.com/   
+  repo-url: https://github.com/Saifuddin86/stat_for_engineering   
   search: 
     location: sidebar
     type: textbox

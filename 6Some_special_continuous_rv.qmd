@@ -675,7 +675,7 @@ $\implies \frac{1}{\lambda}=0.5 \ \ second$
 
 **a.** $\therefore \lambda=2 s^{-1}$
 
-**b.**  If $M$ is the median time between request then,
+**b.** If $M$ is the median time between request then,
 
 $P(T \le M)=0.5$
 
@@ -691,9 +691,9 @@ $\implies M =\frac{ln(0.5)}{-\lambda}=\frac{ln(0.5)}{-2}=0.3466\approx0.35$
 
 So, median time between request is $0.35s$
 
-**c.**  Standard deviation of $T$, $\sigma_T=\frac{1}{\lambda}s=1/2 =0.5 s$
+**c.** Standard deviation of $T$, $\sigma_T=\frac{1}{\lambda}s=1/2 =0.5 s$
 
-**d.**  Let, $P_{80}$ denotes 80th percentile.
+**d.** Let, $P_{80}$ denotes 80th percentile.
 
 So, solve the following equation for $P_{80}$
 
@@ -707,11 +707,11 @@ $\implies P_{80}=\frac {ln(0.20)}{-\lambda}=0.805$
 
 $\therefore P_{80}=0.805 s$
 
-**e.**  $P(T>1)=e^{-\lambda *1}=0.1353$
+**e.** $P(T>1)=e^{-\lambda *1}=0.1353$
 
-**f.**   If there have been no requests for the past two seconds, the probability that there more than ***one*** **additional second** will elapse before the next request is:
+**f.** If there have been no requests for the past two seconds, the probability that there more than ***one*** **additional second** will elapse before the next request is:
 
-$P(T>1+2 /T>2)=P(T>1)=e^{-\lambda *1}=0.1353$ [by using *Lack of memory property*]
+$P(T>1+2 /T>2)=P(T>1)=e^{-\lambda *1}=0.1353$ \[by using *Lack of memory property*\]
 
 8.A radioactive mass emits particles according to a Poisson process at a mean rate of 2 per second. Let T be the waiting time, in seconds, between emissions.
 
