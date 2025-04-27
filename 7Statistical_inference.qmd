@@ -1,0 +1,533 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Statistical inference
+
+**Statistical inference** refers to the branch of statistics that focuses on making decisions and drawing conclusions about populations based on sample data. These methods use information collected from a sample to infer characteristics of the larger population.
+
+Statistical inference may be divided into two major areas:
+
+-   **Parameter estimation** and
+
+-   **Hypothesis testing**
+
+**Parameter estimation** involves estimation of population **parameter** from **sample data**.
+
+**Hypothesis testing** involves test any **claim** about **population parameter** using sample data.
+
+## Parameter estimation
+
+### Point estimation
+
+**Point Estimation** is a type of statistical inference where we use sample data to calculate a **single number** (a point) that serves as the best guess for an unknown population parameter.
+
+::: callout-note
+**Random sample**
+
+**Statistic**
+
+**Point estimator**
+
+**Point estimate**
+:::
+
++-------------------------------+-------------+---------------------------------------------------------------------------------------+
+| Population parameter          | Symbol      | Point estimator                                                                       |
++===============================+:===========:+:=====================================================================================:+
+| Population mean               | $\mu$       | Sample mean,                                                                          |
+|                               |             |                                                                                       |
+|                               |             | $\bar X=\frac{\sum_{i=1}^n X_i}{n}$                                                   |
++-------------------------------+-------------+---------------------------------------------------------------------------------------+
+| Population standard deviation | $\sigma$    | Sample standard deviation,                                                            |
+|                               |             |                                                                                       |
+|                               |             | $S=\sqrt{\frac{\sum(X-\bar X)^2}{n-1}}=\sqrt {\frac{\sum X^2 -n\cdot \bar X^2}{n-1}}$ |
++-------------------------------+-------------+---------------------------------------------------------------------------------------+
+| Population proportion         | $p$         | Sample proportion,                                                                    |
+|                               |             |                                                                                       |
+|                               |             | $\hat P=\frac{\# \ \ of \ \  outcomes\ \ of  \ \ interest }{n}$                       |
++-------------------------------+-------------+---------------------------------------------------------------------------------------+
+
+: Some common population parameters and their point estimators {#tbl-tab7.1}
+
+### Properties of Point Estimators
+
+Suppose
+
+$\theta$ be the population parameter of interest
+
+$\hat \theta$ be the sample statistic or point estimator of $\theta$
+
+A "good" estimator has some desirable properties.
+
+**Unbiasedness**
+
+A sample statistic $\hat \theta$ is said to be unbiased estimator of the population parameter $\theta$ if
+
+$$
+E(\hat\theta)=\theta
+$$ **Efficiency**
+
+**Consistency**
+
+### Sampling Distributions and the Central Limit Theorem
+
+The probability distribution of a **sample statistic** is called a **sampling distribution.**
+
+For example, due to sampling variability the **sample mean** $\bar X$ has a sampling distribution.
+
+**Sampling distribution of** $\bar X$
+
+Suppose that a random sample of size $n$ is taken from a normal population with mean $\mu$ and variance $\sigma^2$. Now each observation in this sample, say, $X_1, X_2,...,X_n$, is a normally and independently distributed random variable with mean $\mu$ and variance $\sigma^2$. Then because linear functions of independent, normally distributed random variables are also normally distributed (Chapter ?), we conclude that the sample mean
+
+$$
+\bar X=\frac{X_1+X_2+....+X_n}{n}
+$$ has a normal distribution with mean $\mu_{\bar X}=\mu$ and variance $\sigma^2_{\bar X}=\frac{\sigma^2}{n}$.
+
+Symbolically, $\bar X \sim N(\mu,\frac{\sigma^2}{n})$.
+
+**But what if we sampling from a non-normal population?**
+
+The sampling distribution of the sample mean will still be approximately normal with mean $\mu$ and variance $\frac{\sigma^2}{n}$ if the sample size $n$ is large. This is one of the most useful theorems in statistics, called the central limit theorem. The statement is as follows:
+
+::: callout-note
+## Central limit theorem
+
+If $X_1,X_2,...,X_n$ is a random sample of size $n$ taken from a population (either finite or infinite) with mean $\mu$ and finite variance $\sigma^2$ and if $\bar X$ is the sample mean, the limiting form of the distribution of
+
+$$
+Z=\frac{\bar X-\mu}{\sigma/\sqrt n}
+$$
+
+as $n\rightarrow\infty$, is the standard normal distribution that is $Z\sim N(0,1)$
+:::
+
+The definition of "sufficiently large" depends on the extent of non-normality of $X$ . Some authors consider a sample will be sufficiently large if $n\ge30$ [@walpole2017].
+
+::: callout-important
+## Central Limit Theorem through simulation
+
+In this section we illustrates how sampling distributions of sample means approximate to normal or bell shaped distribution as we increase the sample size .
+
+**At first,** we consider a population data regarding `gdp per capita (USD),2023` of 218 countries. We can see that the distribution of `gdp per capita` is highly skewed to the right (see @fig-fig_clt1).
+
+```{r}
+#| label: fig-fig_clt1
+#| fig-cap: "Frequency histogram of GDP percapita of N=218 countries"
+
+library(readxl)
+
+GDP_percap23 <- read_excel("StatForBandE_data.xlsx", 
+    sheet = "GDP_percap23")
+#View(GDP_percap23)
+library(tidyverse)
+library(scales)
+
+
+#GDP_percap23 %>% select(`Country Name`,Y_2023) %>%arrange(-Y_2023)
+
+GDP_percap23 %>% select(`Country Name`,Y_2023) %>%
+  filter(`Country Name`!="Monaco") %>% 
+  drop_na()->gdp_2023
+
+#gdp_2023 %>% summarise(mu=mean(Y_2023), sigma=sd(Y_2023)) %>% 
+#  knitr::kable(digits = 2)
+
+gdp_2023%>%
+  ggplot(aes(x=Y_2023))+
+  geom_histogram(col="black",fill="lightblue",bins = 10)+
+  scale_x_continuous(labels = comma)+
+  labs(x="GDP per capita (USD)",y="Number of countries",
+       caption="Source: World Bank, 2023")+
+  theme_bw()+
+  theme(plot.caption =element_text(face = "italic",size = 12))+
+  annotate("text", x=100000,y=75, 
+           label = expression(~mu == 19575.12),
+           color = "black", size = 4)+
+  annotate("text", x=100000,y=70, 
+           label = expression( ~ sigma == 25324.77),
+           color = "black", size = 4)+
+  annotate("rect",xmin = 83000, xmax = 119500, ymin = 65, ymax = 80, 
+           alpha = 0.2, fill = "lightblue")
+
+
+```
+
+**Now** we draw 1000 random samples (without replacement) of different sample sizes and then plot the histogram of samples means.
+
+```{r}
+#| label: fig-cltsim
+#| fig-cap: "Demonstration of Central Limit Theorem through simulation"
+#| fig-subcap: 
+#|   - "Sampling distribution of sample mean for sample size n=10"
+#|   - "Sampling distribution of sample mean for sample size n=30"
+#|   - "Sampling distribution of sample mean for sample size n=100"
+#| layout-ncol: 3
+
+
+xgdp<-gdp_2023$Y_2023
+nsim=1000 # no of simulations/ samples
+
+set.seed(231)
+
+replicate(nsim,sample(xgdp,10)) %>%colMeans() %>%as.data.frame() %>% ggplot(aes(x=.))+
+  geom_histogram(bins = 10,fill="steelblue1",col="black")+
+  theme_bw()->pclt_1
+
+  
+
+replicate(nsim,sample(xgdp,30)) %>%colMeans() %>%as.data.frame() %>% ggplot(aes(x=.))+
+  geom_histogram(bins = 10,fill="steelblue2",col="black")+
+  theme_bw()->pclt_2
+  
+
+replicate(nsim,sample(xgdp,100)) %>%colMeans() %>%as.data.frame() %>% ggplot(aes(x=.))+
+  geom_histogram(bins = 10,fill="steelblue3",col="black")+
+  theme_bw()->pclt_3
+
+pclt_1
+pclt_2
+pclt_3
+
+```
+
+From @fig-cltsim we can see that as the sample size increases, the sampling distribution of **sample mean** tends to bell-shaped or normal though the population data was very skewed to the right. This simulation clearly demonstrate the fact of Central Limit Theorem (CLT).
+
+For more interactive simulation of **CLT** please visit the [shinyApp](saifuddin24.shinyapps.io/CLT_Sim/).
+:::
+
+**Problem 7.1** An electronics company manufactures resistors that have a mean resistance of 100 ohms and a standard deviation of 10 ohms. The distribution of resistance is normal. **Find** the probability that a random sample of n = 25 resistors will have an average resistance of fewer than 95 ohms.
+
+**Problem 7.2** Resistors are labeled 100 $\Omega$. In fact, the actual resistances are uniformly distributed on the interval $(95, 103)$. Suppose 40 resistors are randomly selected. **Determine** the probability that the sample mean of 40 resistors will be less than 100 $\Omega$?
+
+[Solution:]{.underline} Let $X$ be the resistance in ohm. Given $X\sim U(95,103)$.
+
+Hence, $\mu=E(X)=\frac{a+b}{2}=\frac{95+103}{2}=99$ and
+
+$\sigma^2=\frac{(b-a)^2}{12}=\frac{(103-95)^2}{12}=5.33$.
+
+Since $n=40$ is sufficiently large so according to **CLT** $\bar  X\sim_{} N(\mu, \sigma^2_{\bar X})$ approximately.
+
+Here, $\sigma^2_{\bar X}=\sigma^2/n=5.33/40=0.13325$ and $\sigma_{\bar X}=\sqrt 0.13325=0.3650$
+
+$$
+\therefore P(\bar X<100)=P\left(\frac{\bar X-\mu}{\sigma_{\bar X}}< \frac{100-99}{0.3650}\right)=P(Z<2.74)=0.9969
+$$.
+
+\
+
+**Problem 7.3** A synthetic fiber used in manufacturing carpet has tensile strength that is normally distributed with mean 75.5 psi and standard deviation 3.5 psi. **Find** the probability that a random sample of n = 6 fiber specimens will have sample mean tensile strength that exceeds 75.75 psi.
+\
+
+### Methods of point estimation
+
+Two popular methods of estimations are (a) the **method of moments** and (b)the **method of** **maximum likelihood** .
+
+#### Method of moments
+
+Method of moments uses the relationship between population and sample moments to estimate parameters of interest.
+
+::: callout-note
+## Moments
+
+The $k^{th}$ population moment is
+
+$$
+\mu'{_k}= E(X^k) ,\ \  k=1,2,...
+$$
+
+The corresponding $k^{th}$ sample moment is
+
+$$
+m'_{k}=\frac{\sum_{i=1}^n X_i} {n} , \ \ k=1,2,....
+$$
+:::
+
+## Moment Estimators
+
+To estimate $k$ parameters, equate the *first* $k$ population moments to the first $k$ sample moments and solving the resulting equations for the unknown parameters.
+
+For instance, to estimate **two parameter** we can write
+
+$$
+\mu'_{1}=m'_{1}
+$$
+
+and
+
+$$
+\mu'_{2}=m'_{2}
+$$
+
+For details see [@montgomery2014, page 256] and [@baron2019, page 245].
+
+#### Method of maximum likelihood
+
+The maximum likelihood technique is among the most effective ways to get a point estimator of a parameter. The renowned British statistician Sir R. A. Fisher created this method in the 1920s. As the name suggests, the value of the parameter that maximizes the **likelihood function** will serve as the estimator.
+
+::: callout-note
+## Maximum Likelihood Estimator
+
+Suppose that $X$ is a random variable with probability distribution $f (x;\theta )$ where $\theta$ is a single unknown parameter. Let $x_1,x_2,...,x_n$ be the observed values in a random sample of size $n$. Then the likelihood function of the sample is
+
+$$
+L(\theta)=f(x_1;\theta)\cdot f(x_2;\theta)....f(x_n;\theta)=\prod_{i=1}^n f(x_i;\theta)
+$$ The **maximum likelihood estimator (MLE)** of $\theta$ is the value of $\theta$ that maximizes the likelihood function $L(\theta)$ .
+:::
+
+For details see [@montgomery2014, page 258] and [@baron2019, page 248].
+
+## Interval estimation
+
+Instead of estimating a population parameter by a single value (point estimator) it is more reasonable to estimate with an **interval** with some confidence (probability) that our **parameter** value will be in the **interval.**
+
+::: callout-note
+## Interval Estimator
+
+An **interval estimator** is a rule for determining (based on sample information) an interval that is likely to include the parameter. The general form of an interval estimate is as follows:
+
+$$
+Point\ \ estimate \pm margin \ \ of \ \ error
+$$
+:::
+
+Due to sampling variability, **interval estimator** is also random.
+
+::: callout-note
+## Developing (1-$\alpha$)% CI for $\mu$
+
+```{r fig.height=3}
+#| label: fig-figCI
+#| fig-cap: "$P(-z_{\\alpha/2}<Z<z_{\\alpha/2}) =1-\\alpha$"
+
+# Load necessary package
+library(ggplot2)
+
+# Create data for the normal curve
+x <- seq(-4, 4, length = 1000)
+y <- dnorm(x)
+
+# Set alpha level
+alpha <- 0.05
+z_alpha <- qnorm(1 - alpha/2)  # e.g., 1.96 for 95% confidence
+
+# Make a data frame
+df <- data.frame(x, y)
+
+# Plot
+ggplot(df, aes(x, y)) +
+  geom_line(color = "blue", size = 1.2) +   # normal curve
+  geom_area(data = subset(df, x >= -z_alpha & x <= z_alpha), 
+            aes(x, y), fill = "skyblue", alpha = 0.5) +  # shaded middle area
+  geom_vline(xintercept = c(-z_alpha, z_alpha), linetype = "dashed", color = "red") + # critical lines
+  scale_x_continuous(
+    breaks = c(-z_alpha, 0, z_alpha),
+    labels = c(expression(-z[alpha/2]), expression(0), expression(z[alpha/2]))
+  ) +
+  labs(
+    title = expression(paste("Standard Normal Curve with ", (1-alpha), " Confidence Interval")),
+    x = "Z value",
+    y = "Density"
+  ) +
+  theme_minimal() +
+  annotate("text", x = 0, y = 0.1, 
+           label = expression((1-alpha)),
+           size = 5, color = "darkblue")
+
+
+
+```
+:::
+
+## Interval estimate of a population mean: $\sigma$ known
+
+The $(1-\alpha)100\%$ confidence interval for $\mu$ is :
+
+$$
+\bar x \pm z_{\alpha/2} \frac{\sigma}{\sqrt n}
+$$ {#eq-9.1}
+
+Or,
+
+$$
+\bar x-z_{\alpha/2}\frac {\sigma}{\sqrt n}, \bar x+z_{\alpha/2}\frac {\sigma}{\sqrt n}
+$$
+
+We can express this confidence interval in a probabilistic way:
+
+$$
+P\left( \bar x-z_{\alpha/2}\frac{\sigma}{\sqrt n}<\mu<\bar x+z_{\alpha/2}\frac{\sigma}{\sqrt n}  \right)=1-\alpha
+$$
+
+**NOTE:**
+
+1\) Here, $z_{\alpha/2}$ is the $z$ value providing an area of $\alpha/2$ in the upper tail of the standard normal distribution that is $P(Z>z_{\alpha/2})=\alpha/2$.
+
+2\) $z_{\alpha/2} \cdot \frac{\sigma}{\sqrt n}$ is often called **margin of error (ME)**.
+
+### **Interpretation of confidence interval**
+
+The probabilistic equation of confidence interval says that, if we repeatedly construct confidence intervals in this manner, we will expect $(1-\alpha)100\%$ of them contain $\mu$.
+
+### Understanding confidence interval through Simulation
+
+Suppose $X\sim N(50,5^2)$ . Now consider a population data of size $N=10000$ and the histogram of $X$ is:
+
+```{r}
+set.seed(36)
+X<-rnorm(10000,50,5)
+
+hist(X,freq = F,sub= "Population size, N=10000")
+lines(density(X),lwd=2)
+```
+
+Now we draw a random sample of size $n=50$ from this population and construct a 95% confidence interval (CI) for $\mu$. The CI may or may not include the $\mu=50$ !!!
+
+```{r}
+set.seed(36)
+mu=50;sigma=5
+
+## Constructing (1-alpha)*100% CI
+
+alpha=0.05 
+
+con.coef=1-alpha # confidence level
+
+z=round(abs(qnorm(alpha/2)),2)# z=1.96
+
+n=50 # sample size
+
+s.e<-sigma/sqrt(n)
+
+sampl_1<-sample(X,n)
+cat("Sample data :", sampl_1)
+
+cat("Sample mean:",round(mean(sampl_1),2))
+
+ci_1<-c(lower=mean(sampl_1)-z*s.e,upper=mean(sampl_1)+z*s.e)
+#ci_1[1]
+cat("95%  CI:","\n", "[Lower ,Upper]","\n", "[",round(ci_1[1],2),",",round(ci_1[2],2),"]")
+```
+
+Luckily our 95% CI contains the true population mean $\mu=50$ 😊.
+
+Lets simulate 100 samples each of size $n=50$ and construct all 95% CIs.
+
+```{r}
+#| label: fig-conf_sim
+#| fig-cap: "Simulation of 95% confidence intervals for $\\mu$"
+
+library(tidyverse)
+
+# Suppose, X~N(50,5^2); so
+#cat("mu=",50,",", "sigma=",5)
+
+
+
+# Let simulate 100 samples each of size n=50
+
+sampl=0
+
+B=100 # number of samples we have drawn from population X
+
+sampl<-(replicate(B,sample(X,n,replace = FALSE)))
+
+sample.means<-colMeans(sampl)
+
+#class(sample.means)
+
+sample.means<-as.data.frame(sample.means)
+#class(sample.means)
+
+sample.means%>%rename(x_bar=sample.means)->sample.means
+
+ci<-sample.means%>%mutate(ll=x_bar-z*s.e,ul=x_bar+z*s.e)
+
+ci%>%mutate(id=1:100)%>%select(id,x_bar,ll,ul)->ci
+
+ci%>%mutate(Capture=ifelse(50>ll & 50<ul,"1","0"))->ci_95
+
+#ci%>%head()
+
+# https://statisticsglobe.com/draw-plot-with-confidence-intervals-in-r
+
+colorset = c('0'='red','1'='black')
+
+
+labels<- expression("Population mean,"~mu == 50)
+
+ggplot(ci_95, aes(id, x_bar)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = ll, ymax = ul,color = Capture))+
+  geom_hline(yintercept = 50, linetype = "dashed", color = "blue")+
+  scale_color_manual(values = colorset)+
+  ylim(45,55)+
+  scale_x_continuous(breaks = seq(1,100,5),limits=c(0, 101))+
+  #annotate("text",label=paste("Population mean,mu=",mu),x=90,y=54)+
+  annotate("text",x=90,y=53.5,label=as.character(labels),parse=TRUE)+
+    labs(title =paste(con.coef*100, "% Confidence Intervals, n =", n),
+       x="Sample ID")+
+  coord_flip()+
+  theme_bw()
+```
+
+We can see that out of 100 CIs , 95 of them contain true population mean $\mu=50$ and the rest 5 do not.
+
+| $1-\alpha$ | $\alpha$ | $z_{\alpha/2}$ |
+|:----------:|:--------:|:--------------:|
+|    0.90    |   0.10   |     1.645      |
+|    0.95    |   0.05   |      1.96      |
+|    0.98    |   0.02   |      2.33      |
+|    0.99    |   0.01   |     2.575      |
+
+: Four Commonly Used Confidence Levels and $z_{\alpha/2}$ {#tbl-tab9.3}
+
+## Interval estimate of a population mean: $\sigma$ unknown
+
+The $(1-\alpha)100\%$ confidence interval for $\mu$ is :
+
+$$
+\bar x \pm t_{\alpha/2} \frac{s}{\sqrt n}
+$$ {#eq-9.2}
+
+Or,
+
+$$
+\bar x-t_{\alpha/2}\frac {s}{\sqrt n}, \bar x+t_{\alpha/2}\frac {s}{\sqrt n}
+$$
+
+We can express this confidence interval in a probabilistic way:
+
+$$
+P\left( \bar x-t_{\alpha/2}\frac{s}{\sqrt n}<\mu<\bar x+t_{\alpha/2}\frac{s}{\sqrt n}  \right)=1-\alpha
+$$
+
+Here, $t_{\alpha/2}$ is the $t$ value providing an area of $\alpha/2$ in the upper tail of the $t$ distribution with $(n-1)$ degrees of freedom that is $P(T>t_{\alpha/2,n-1})=\alpha/2$.
+
+::: callout-note
+## *t*-Distribution
+
+Let $Z\sim N(0,1)$ and $V\sim \chi^2 _\nu$ . If $Z$ and $V$ are independent then the random variable
+
+$$
+T=\frac{Z}{\sqrt {V/\nu}}
+$$
+
+said to have a *Student-t distribution with* $\nu$ *degrees of freedom.* The PDF of $T$ is
+
+$$
+f(t)=\frac{\Gamma [(\nu+1)/2]}{\sqrt{ \pi\nu} \ \ \Gamma{(\nu/2)}}\left(1+\frac{t^2}{\nu}\right)^{-(\nu+1)/2} ; -\infty<t<\infty.
+$$
+
+**Properties:**
+
+1)  **Symmetry:** $t$-distribution is symmetric about mean (zero). So
+
+    if $P(T>t_\nu)=\alpha$ then $P(T<-t_\nu)=\alpha$.
+
+2)  **Convergence to Normal:** As $n\rightarrow\infty$ then the distribution of $T_\nu$ approaches the **standard normal distribution**.
+
+3)  **Cauchy as special case:** The $T_1$ distribution is the same as the Cauchy distribution.
+:::
