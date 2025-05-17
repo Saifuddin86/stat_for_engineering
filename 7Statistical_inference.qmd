@@ -195,7 +195,7 @@ pclt_3
 
 From @fig-cltsim we can see that as the sample size increases, the sampling distribution of **sample mean** tends to bell-shaped or normal though the population data was very skewed to the right. This simulation clearly demonstrate the fact of Central Limit Theorem (CLT).
 
-For more interactive simulation of **CLT** please  [click here to visit the ShinyApp for Central Limit Theorem Simulation](https://saifuddin24.shinyapps.io/CLT_Sim/).
+For more interactive simulation of **CLT** please [click here to visit the ShinyApp for Central Limit Theorem Simulation](https://saifuddin24.shinyapps.io/CLT_Sim/).
 :::
 
 **Problem 7.1** An electronics company manufactures resistors that have a mean resistance of 100 ohms and a standard deviation of 10 ohms. The distribution of resistance is normal. **Find** the probability that a random sample of n = 25 resistors will have an average resistance of fewer than 95 ohms.
@@ -216,10 +216,7 @@ $$
 \therefore P(\bar X<100)=P\left(\frac{\bar X-\mu}{\sigma_{\bar X}}< \frac{100-99}{0.3650}\right)=P(Z<2.74)=0.9969
 $$.
 
-\
-
-**Problem 7.3** A synthetic fiber used in manufacturing carpet has tensile strength that is normally distributed with mean 75.5 psi and standard deviation 3.5 psi. **Find** the probability that a random sample of n = 6 fiber specimens will have sample mean tensile strength that exceeds 75.75 psi.
-\
+**Problem 7.3** A synthetic fiber used in manufacturing carpet has tensile strength that is normally distributed with mean 75.5 psi and standard deviation 3.5 psi. **Find** the probability that a random sample of n = 6 fiber specimens will have sample mean tensile strength that exceeds 75.75 psi.\
 
 ### Methods of point estimation
 
@@ -245,7 +242,7 @@ m'_{k}=\frac{\sum_{i=1}^n X_i} {n} , \ \ k=1,2,....
 $$
 :::
 
-## Moment Estimators
+#### Moment Estimators
 
 To estimate $k$ parameters, equate the *first* $k$ population moments to the first $k$ sample moments and solving the resulting equations for the unknown parameters.
 
@@ -341,7 +338,7 @@ ggplot(df, aes(x, y)) +
 ```
 :::
 
-## Interval estimate of a population mean: $\sigma$ known
+### Interval estimate of a population mean: $\sigma$ known
 
 The $(1-\alpha)100\%$ confidence interval for $\mu$ is :
 
@@ -484,7 +481,7 @@ We can see that out of 100 CIs , 95 of them contain true population mean $\mu=50
 
 : Four Commonly Used Confidence Levels and $z_{\alpha/2}$ {#tbl-tab9.3}
 
-## Interval estimate of a population mean: $\sigma$ unknown
+### Interval estimate of a population mean: $\sigma$ unknown
 
 The $(1-\alpha)100\%$ confidence interval for $\mu$ is :
 
@@ -531,3 +528,299 @@ $$
 
 3)  **Cauchy as special case:** The $T_1$ distribution is the same as the Cauchy distribution.
 :::
+
+## Hypothesis test : Introduction and testing one population parameter
+
+### **Definition**
+
+A statistical hypothesis is a *statement* about the *parameters* of one or more populations.
+
+**Example 1:** A manufacturer claims that the mean life of a smartphone is more than 1.5 years.
+
+**Example 2:** A local courier service claims that they deliver a ordered product within 30 minutes on average.
+
+**Example 3:** A sports drink maker claims that the mean calorie content of its beverages is 72 calories per serving.
+
+### Types of hypothesis
+
+Statistical hypothesis are stated in two forms- (i) Null hypothesis ($H_0$) and (ii) Alternative hypothesis ($H_1$).
+
+Both null and alternative hypothesis are the written about the parameter of interest based on the claim.
+
+-   We will always state the null hypothesis as an **equality claim**.
+
+-   However, when the alternative hypothesis is stated with the **"\< "** sign, the implicit claim in the null hypothesis can be taken as **" ≥ "** or **"="** sign.
+
+-   When the alternative hypothesis is stated with the **"\>"** sign, the implicit claim in the null hypothesis can be taken as **"≤"** or **"="** sign.
+
+### Developing hypotheses
+
+To develop or state null and alternative hypothesis, at first we have to clearly identify the **"claim"** about population parameter. Now we will see some examples.
+
+**Example 1:** A manufacturer claims that the mean life of a smartphone is more than 1.5 years.
+
+**Hypothesis:**
+
+::: text-center
+$H_0:\mu=1.5$
+
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \  H_1: \mu>1.5 \ \ (claim)$
+:::
+
+**Example 2:** A local courier service claims that they deliver a ordered product within 30 minutes on average.
+
+**Hypothesis:**
+
+::: text-center
+$H_0: \mu=30$
+
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ H_1: \mu<30 \ \ (claim)$
+:::
+
+**Example 3:** A sports drink maker claims that the mean calorie content of its beverages is 72 calories per serving.
+
+**Hypothesis:**
+
+::: text-center
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ H_0: \mu=72 \ \ (claim)$
+
+$H_1: \mu \ne 72$
+:::
+
+### Types of test based on alternative hypothesis $H_1$
+
+-   $H_1: \mu< \mu_0$ (Lower tailed)
+
+-   $H_1: \mu> \mu_0$ (Upper tailed)
+
+-   $H_1: \mu \ne \mu_0$ (Two-tailed)
+
+### Types of error in hypothesis test
+
+While testing a statistical hypothesis concerning population parameter we commit two types of errors.
+
+-   **Type I error** occurs when we **reject** a **TRUE** $H_0$
+
+-   **Type II error** occurs when we **FAIL to reject** a **FALSE** $H_0$
+
+-   The **Level of significance** is the probability of comiting **Type** **I error**. It is denoted by $\alpha$.
+
+$$
+\alpha= P(Type \ \ I \ \ error)
+$$
+
+-   The probability of committing a **Type II error**, denoted by $\beta$.
+
+$$
+\beta =P(Type \ \ II \ \ error)
+$$
+
+::: callout-important
+## Note
+
+**Type I** **error** is more serious than **Type II** error. Because rejecting a TRUE statement is more devastating than FAIL to reject a FALSE statement. So, we always try to keep our probability of Type I error as small as possible (1% or at most 5%).
+:::
+
+**So, how these hypotheses will be tested?**
+
+To test a hypothesis we have to determine
+
+-   a **test-statistic**; and
+
+-   **Critical/Rejection region** based on the sampling distribution of test-statistic for a given $\alpha$ ;
+
+-   If the value of test-statistic **falls** in **Critical/Rejection region**, then we reject Null ($H_0$) hypothesis; otherwise not.
+
+Another way is to use **P-value.** What is p-value?
+
+-   The **P-value** is the smallest level of significance that would lead to rejection of the null hypothesis $H_0$ with the given data.
+
+-   The **P-value** is the probability of observing a test statistic as extreme as, or more extreme than, the value calculated from your sample data, *assuming that the null hypothesis is true*.
+
+-   **If** $P$**-value** $\le\alpha$ **, reject the null hypothesis otherwise we fail to reject** $H_0$**.**
+
+-   Most of the statistical softwares routinely compute p-value for any hypothesis test.
+    \
+
+### Hypothesis testing concerning population mean ($\mu$)
+
+The following two hypotheses tests are used concerning population mean ($\mu$):
+
+1\. One sample z-test (with known $\sigma$)
+
+2\. One sample t-test (with unknown $\sigma$)\
+
+#### One sample z-test
+
+When sampling is from a **normally distributed population** or **sample size is sufficiently large** and t**he population variance is known**, the test statistic for testing $H_0: \mu=\mu_0$ at $\alpha$ is
+
+$$
+z_0=\frac{\bar x-\mu_0}{\sigma /\sqrt n}
+$$
+
+**Decision (Critical value approach):** If calculated $z$ falls in rejection region (CR) , then reject $H_0$ . Otherwise, do not reject $H_0$.
+
+-   For lower tailed test, reject $H_0$ if $z_0<-z_\alpha$ ;
+
+-   For upper tailed test, reject $H_0$ if $z_0> z_\alpha$ ;
+
+-   For two-tailed test, reject $H_0$ if $z_0<-z_{\alpha/2}$ or $z_0>z_{\alpha/2}$ .
+
+![Critical region for test of hypothesis (a) Two-tailed test (b) Upper-tailed test (c) Lower-tailed test](images/clipboard-3183526582.png){#fig-7.5 fig-alt="Source: D.C Montgomery (2014)" width="624"}
+
+```{r}
+library(reticulate)
+```
+
+**Decision (P-value approach):** If calculated P-value for the test statistic is less than or equal to $\alpha$ then reject the $H_0$ otherwise do not reject.
+
+-   For lower tailed test, $P$-value $=P(Z<z_0)$;
+
+-   For upper tailed test, $P$-value $=P(Z>z_0)$;
+
+-   For two-tailed test, $P$-value $P(Z>|z_0|)+P(Z<-|z_0|)]$.
+
+**Problem 7.4** State the null and alternative hypothesis in each case.
+
+a\) A hypothesis test will be used to potentially provide evidence that the population mean is more than 10.
+
+b\) A hypothesis test will be used to potentially provide evidence that the population mean is not equal to 7.
+
+c\) A hypothesis test will be used to potentially provide evidence that the population mean is less than 5. \
+
+**Problem 7.5 (a)** For the hypothesis test H0: μ = 10 against H1:μ \>10 and variance known, calculate the P-value for each of the following test statistics.
+
+\(i\) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$ \
+
+[Solution 7.5 (a):]{.underline} Since this is an upper-tailed test so
+
+\(i\) P-value=$P(Z>2.05)=P(Z<-2.05)=0.0202$
+
+\(ii\) P-value=$P(Z>-1.84)=P(Z<1.84)=0.9671$
+
+\(iii\) P-value=$P(Z>0.4)=P(Z<-0.4)=0.3446$
+
+**Problem 7.5 (b)** For the hypothesis test H0: μ = 5 against H1: μ \<5 and variance known, calculate the P-value for each of the following test statistics.
+(i) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$
+
+[Solution 7.5 (b):]{.underline} Since this is an lower-tailed test so
+
+\(i\) P-value=$P(Z<2.05)=0.9798$.
+
+\(ii\) P-value=$P(Z<-1.84)=0.03288$.
+
+\(iii\) do it yourself.
+
+**Problem 7.5 (c)** For the hypothesis test H0:μ = 7 against H1: μ ≠ 7 and variance known, calculate the P-value for each of the following test statistics
+\
+(i) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$
+
+[Solution 7.5 (c):]{.underline} Since this is an two-tailed test so
+
+\(i\) P-value=$P(Z>2.05)+P(Z<-2.05)=2P(Z<-2.05)=0.0404$.
+
+\(ii\) P-value=$P(Z<-1.84)+P(Z>1.84)=2P(Z<-1.84)=0.0658$.
+
+\(iii\) do it yourself.
+
+**Problem 7.6** The life in hours of a battery is known to be approximately normally distributed with standard deviation $\sigma=$ 1.25 hours. A random sample of 10 batteries has a mean life of $\bar x=$ 40.5 hours. **Conduct** a hypothesis test to justify the claim that battery life exceeds 40 hours.
+
+**Problem 7.7** A bearing used in an automotive application is supposed to have a nominal inside diameter of 1.5 inches. A random sample of 25 bearings is selected, and the average inside diameter of these bearings is 1.4975 inches. Bearing diameter is known to be normally distributed with standard deviation $\sigma$ = 0.01 inch. **Test** the hypothesis $H_0:\mu = 1.5$ . versus $H_1:\mu \ne 1.5$ using $\alpha = 0.01$.
+\
+
+**Problem 7.8** The manufacturer of the X-15 steel-belted radial truck tire claims that the mean mileage the tire can be driven before the tread wears out is 60,000 miles. Assume the mileage wear follows the normal distribution and the standard deviation of the distribution is 5,000 miles. Crosset Truck Company bought 48 tires and found that the mean mileage for its trucks is 59,500 miles. Is Crosset’s experience different from that claimed by the manufacturer at the 0.05 significance level?
+
+#### One sample t-test
+
+When sampling is from a **normally distributed population** or **sample size is sufficiently large** and t**he population variance is unknown**, the test statistic for testing $H_0: \mu=\mu_0$ at $\alpha$ is
+
+$$
+t=\frac{\bar x-\mu_0}{s /\sqrt n}
+$$
+
+Test statistic $t$ follows a Student’s 𝑡 distribution with $(n - 1)$ degrees of freedom.
+
+**Decision (Critical value approach):** If calculated $t$ falls in rejection region (CR) , then reject $H_0$ . Otherwise, do not reject $H_0$.
+
+-   For lower tailed test, reject $H_0$ if $t<-t_\alpha$ ;
+
+-   For upper tailed test, reject $H_0$ if $t> t_\alpha$ ;
+
+-   For two-tailed test, reject $H_0$ if $t<-t_{\alpha/2}$ or $t>t_{\alpha/2}$ .
+
+**Problem 10.4** Annual per capita consumption of milk is 21.6 gallons (*Statistical Abstract of the United States: 2006*). Being from the Midwest, you believe milk consumption is higher there and wish to support your opinion. A sample of 16 individuals from the Midwestern town of Webster City showed a sample mean annual consumption of 24.1 gallons with a standard deviation of $s=4.8$ .
+
+a\) Develop a hypothesis test that can be used to determine whether the mean annual consumption in Webster City is higher than the national mean.
+
+b\) Test the hypothesis at $\alpha=0.05$ .
+
+c\) Draw a conclusion.
+
+**Problem 10.5** The mean length of a small counterbalance bar is 43 millimeters. The production supervisor is concerned that the adjustments of the machine producing the bars have changed. He asks the Engineering Department to investigate. Engineer selects a random sample of 10 bars and measures each. The results are reported below in millimeters.
+
+42, 39, 42, 45, 43, 40, 39, 41, 40, 42
+
+Is it reasonable to conclude that there has been a change in the mean length of the bars?
+
+### Normality test
+
+In parametric (distribution based ) hypothesis test the checking normality assumption of study variable is a common practice especially when the sample size is small ($n<30$). For large samples, the **Central Limit Theorem (CLT)** often makes this test robust to non-normality.
+
+The normality assumption is checked in two ways:
+
+a\) Graphically
+
+b\) Numerically using some normality tests
+
+**a) Graphical procedure to check normality**
+
+We often plot the data (i.e., histogram, density plot, boxplot) to explore so called bell-shaped of the data. But the most popular and effective way to check normality is **Q-Q plot (Quantile- Quantile plot).**
+
+**b) Normality test**
+
+A number of normality tests are available; of them a common test is **Shapiro-Wilk** test of normality suitable for small to medium sample size (3 to 5000) [@shapiro1965analysis; @Royston].
+
+**Shapiro-Wilk Test Statistic W**
+
+$$
+W=\frac{(\sum_{i=1}^n a_i x_{(i)})^2}{\sum_{i=1}^n (x_i-\bar x)^2}
+$$
+
+Where,
+
+-   $x_{(i)}$ : the $i^{th}$ **order statistic** (i.e., the *i*-th smallest value in the sample)
+
+-   $\bar x$: the **sample mean**
+
+-   $a_i$ : constants calculated based on the **expected values and variances** of order statistics from a **standard normal distribution (**Tabulated in Shapiro Wilk Table)
+
+-   $n$: sample size
+
+**Hypotheses:**
+
+-   **Null Hypothesis** $H_0$: The data are **normally distributed**.
+
+-   **Alternative** $H_1$: The data are **not normally distributed**.
+
+We reject $H_0$ if the **p-value** is less than our significance level (e.g., 0.05).
+
+Almost all statistical software and package routinely provide the **Shapiro-Wilk** test.
+
+In **R** Shapiro-Wilk test is available as `shapiro.test` .
+
+```{r}
+set.seed(313)
+uniform.data<-runif(100,2,4)
+shapiro.test(uniform.data)
+
+```
+
+The p-value\<0.05 implies (reject $H_0$) that the data is not normally distributed.
+
+```{r}
+set.seed(313)
+normal.data<-rnorm(100,5,1.5)
+shapiro.test(normal.data) 
+```
+
+The p-value\>0.05 implies (do not reject $H_0$) that the data is normally distributed.
