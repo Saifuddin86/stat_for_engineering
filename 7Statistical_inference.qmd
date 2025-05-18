@@ -639,8 +639,7 @@ Another way is to use **P-value.** What is p-value?
 
 -   **If** $P$**-value** $\le\alpha$ **, reject the null hypothesis otherwise we fail to reject** $H_0$**.**
 
--   Most of the statistical softwares routinely compute p-value for any hypothesis test.
-    \
+-   Most of the statistical softwares routinely compute p-value for any hypothesis test.\
 
 ### Hypothesis testing concerning population mean ($\mu$)
 
@@ -686,11 +685,11 @@ a\) A hypothesis test will be used to potentially provide evidence that the popu
 
 b\) A hypothesis test will be used to potentially provide evidence that the population mean is not equal to 7.
 
-c\) A hypothesis test will be used to potentially provide evidence that the population mean is less than 5. \
+c\) A hypothesis test will be used to potentially provide evidence that the population mean is less than 5.\
 
 **Problem 7.5 (a)** For the hypothesis test H0: μ = 10 against H1:μ \>10 and variance known, calculate the P-value for each of the following test statistics.
 
-\(i\) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$ \
+\(i\) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$\
 
 [Solution 7.5 (a):]{.underline} Since this is an upper-tailed test so
 
@@ -700,8 +699,7 @@ c\) A hypothesis test will be used to potentially provide evidence that the popu
 
 \(iii\) P-value=$P(Z>0.4)=P(Z<-0.4)=0.3446$
 
-**Problem 7.5 (b)** For the hypothesis test H0: μ = 5 against H1: μ \<5 and variance known, calculate the P-value for each of the following test statistics.
-(i) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$
+**Problem 7.5 (b)** For the hypothesis test H0: μ = 5 against H1: μ \<5 and variance known, calculate the P-value for each of the following test statistics. (i) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$
 
 [Solution 7.5 (b):]{.underline} Since this is an lower-tailed test so
 
@@ -711,8 +709,8 @@ c\) A hypothesis test will be used to potentially provide evidence that the popu
 
 \(iii\) do it yourself.
 
-**Problem 7.5 (c)** For the hypothesis test H0:μ = 7 against H1: μ ≠ 7 and variance known, calculate the P-value for each of the following test statistics
-\
+**Problem 7.5 (c)** For the hypothesis test H0:μ = 7 against H1: μ ≠ 7 and variance known, calculate the P-value for each of the following test statistics.
+
 (i) $z_0 = 2.05$ (ii) $z_0 = - 1.84$ (iii) $z_0 = 0.4$
 
 [Solution 7.5 (c):]{.underline} Since this is an two-tailed test so
@@ -726,7 +724,42 @@ c\) A hypothesis test will be used to potentially provide evidence that the popu
 **Problem 7.6** The life in hours of a battery is known to be approximately normally distributed with standard deviation $\sigma=$ 1.25 hours. A random sample of 10 batteries has a mean life of $\bar x=$ 40.5 hours. **Conduct** a hypothesis test to justify the claim that battery life exceeds 40 hours.
 
 **Problem 7.7** A bearing used in an automotive application is supposed to have a nominal inside diameter of 1.5 inches. A random sample of 25 bearings is selected, and the average inside diameter of these bearings is 1.4975 inches. Bearing diameter is known to be normally distributed with standard deviation $\sigma$ = 0.01 inch. **Test** the hypothesis $H_0:\mu = 1.5$ . versus $H_1:\mu \ne 1.5$ using $\alpha = 0.01$.
-\
+
+[Solution 7.7:]{.underline}
+
+Let $X$ be the inside diameter of the bearings (in inches)
+
+**Given**,
+
+Sample size, $n=25$;
+
+Sample mean $\bar x =1.4975$ inches; Population SD, $\sigma =0.01$ inch.
+
+**Hypotheses:**
+
+$$
+H_0: \mu =1.5
+$$
+
+$$
+H_1: \mu \ne 1.5 \ \ (two-tailed)
+$$
+
+**Test statistic:** Since X follows normal distribution and $\sigma$ is known so the test statistic is:
+
+$$
+z_0=\frac{\bar x-\mu_0}{\sigma/\sqrt n}=\frac{1.4975-1.5}{0.01/\sqrt 25}=-1.25
+$$
+
+**Critical value:** At $\alpha=0.05$,
+
+$$
+-z_{\alpha/2}=- 1.96\ \ \ and \ \ \  z_{\alpha/2}=1.96
+$$
+
+**Decision:** Since $z_0$ does not fall in critical region so do not reject the $H_0$.
+
+**Conclusion:** We can conclude the the mean inside diameter of the bearing is 1.5 inches based on thie sample data.
 
 **Problem 7.8** The manufacturer of the X-15 steel-belted radial truck tire claims that the mean mileage the tire can be driven before the tread wears out is 60,000 miles. Assume the mileage wear follows the normal distribution and the standard deviation of the distribution is 5,000 miles. Crosset Truck Company bought 48 tires and found that the mean mileage for its trucks is 59,500 miles. Is Crosset’s experience different from that claimed by the manufacturer at the 0.05 significance level?
 
